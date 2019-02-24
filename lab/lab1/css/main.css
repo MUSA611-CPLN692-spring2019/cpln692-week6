@@ -8,6 +8,38 @@ body {
     font-family: helvetica, arial, sans-serif;
 }
 
+h1 {
+    margin-top: 5px;
+}
+
+button {
+    position: absolute;
+    right: 20px;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+input {
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.05);
+}
+
+select {
+  width: 120px;
+  border: 1px solid #DDDDDD;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 1px 2px 0px rgba(10,10,10,0.1);
+}
+
+hr {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
 .map {
     position: absolute;
     right: 0px;
@@ -24,4 +56,28 @@ body {
     bottom: 0;
     overflow-y: auto;
     padding: 20px;
+}
+
+.filter {
+    font-size: 18px;
+}
+
+.name {
+    margin-bottom: 2px;
+}
+
+.level {
+    color: #BBBBBB;
+    margin-top: 3px;
+}
+
+.school {
+    font-size: 19px;
+    background-color: #EFEFEF;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+}
+
+.addr {
+    font-size: 16px;
 }

@@ -172,4 +172,48 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+  $("#main-heading").text('Restaurant Mapper');
+
+  var labels = ["#text-label1", "#text-label2", "#text-label3", "#number-label",
+                "#checkbox-label1", "#checkbox-label2", "#color-label"];
+  var inputs = ["#text-input1", "#text-input2", "#text-input3", "#numeric-input",
+                '#cbox-input1', '#cbox-input2', '#color-input'];
+  var fillers = ['Green Eggs Cafe','The best brunch spot in Philly','39.948334,-75.162400' , 10];
+  var texts = ['Restaurant name: ', 'Description: ', 'Coordinates (Longitude,Latitude): ',
+               'Marker Radius: ', 'Cash Only', 'Takes Reservations', 'Marker Color: '];
+
+  _.each(labels, function(label) {
+    var i = _.indexOf(labels, label);
+    if(label.includes("text") || label.includes("num")) {
+      $(inputs[i]).val(fillers[i]);
+    }
+    $(label).text(texts[i]);
+    $(inputs[i]).prop('disabled', false);
+  });
+
+  var read = function() {
+    var inputs = {rest : $('#text-input1').val(),
+                  desc : $('#text-input2').val(),
+                  coords : $('#text-input3').val(),
+                  radius : $('#numeric-input').val(),
+                  cash : $('#cbox-input1').change(function() {
+                    $(this).val($(this).is(':checked'));
+                  }).change().val(),
+                  reserv : $('#cbox-input2').change(function() {
+                    $(this).val($(this).is(':checked'));
+                  }).change().val(),
+                  col : $('#color-input').val()};
+    return inputs;
+  };
+
+  $('button').text('Map!').click(function() {
+    var data = read();
+    console.log(data);
+    var marker = L.circleMarker(L.latLng(data.coords.split(',')), { radius:data.radius, color:data.col });
+    var popup = '<p><strong>'+data.rest+'</strong><br><em>'+data.desc+'</em></p>';
+    popup += (data.cash=="true") ? '<p>Cash only. ' : '<p>Credit cards accepted. ';
+    popup += (data.reserv=="true") ? 'Takes reservations.</p>' : 'Does not take reservations.</p>';
+    marker.bindPopup(popup).addTo(map);
+  });
+
 });
