@@ -13,6 +13,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
   ext: 'png'
 }).addTo(map);
 
+$(document).ready(function() {
 /* =====================
   Lab - jQuery
 
@@ -75,7 +76,9 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
         Reading: $(someSelector).text();  // This gets the current value
         Writing: $(someSelector).text(textToSet);  // This sets the value
 
+===================== */
 
+/* =====================
   Task 1: Using javascript, change the HTML to create useful labels for our UI
     *NOTE*: Do not edit part1-jquery.html. You should be able to change the text of an HTML element
             with jQuery alone! Try this: $(<selector>).text('text to set');
@@ -94,7 +97,17 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     you might want to include a name, an address, an age, a couple of boolean characteristics, and a
     favorite color. Don't spend too much time on thinking about the perfect object to represent with
     this form, just about anything will do.
+    ===================== */
+$('#main-heading').text('New title')
+$('#text-label1').text('Input text 1');
+$('#text-label2').text('Input text 2');
+$('#text-label3').text('Input text 3');
+$('#number-label').text('Input a number');
+$('#checkbox-label1').text('Checkbox 1');
+$('#checkbox-label2').text('Checkbox 2');
+$('#color-label').text('Choose a color');
 
+/* =====================
   Task 2: Setting (writing) input values
     *NOTE*: An input's value is not the same as an HTML element's text. We use $(selector).val() as
             opposed to $(selector).text() in this case.
@@ -103,11 +116,33 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     properties of people, the name might be 'bob' and the favorite color could be green (hint: you'll
     want to get formatting exactly right to set a color field; experiment in the console to see what
     the color you'll specify should look like).
+===================== */
+$('input[type=text]').val('User inputted text');
+$('#numeric-input').val(Math.floor(Math.random() * 1000) / 10)
+$('input[type="checkbox"]').each(function() {
+  $(this).prop('checked', Math.floor(Math.random() * 2) == 0);
+});
+$('#color-input').val('#' + ("00000" + Math.floor(Math.random()*16777215).toString(16)).slice(-6))
 
+/* =====================
   Task 3: Getting (reading) input values
     Write the code necessary to read from your input form and return a javascript object (with keys
     to clarify the meaning of each value) that has all the data that's stored in your form.
+===================== */
+// how can I access this variable outside of $(document).ready(), i.e. in the console?
+const getform = function(container) {
+  let inputs = {};
+  $(container + ' input').each(function() {
+    if ($(this).attr('type') === "checkbox") {
+      inputs[$(this).attr('id')] = $(this).is(":checked")
+    } else {
+      inputs[$(this).attr('id')] = $(this).val();
+    }
+  });
+  return inputs;
+};
 
+/* =====================
   Task 4: Enable user interaction with the form
     At this point, we're really only using HTML input fields as a kind of storage. We create some data,
     put that data on the DOM, and read it back out. What we really want to do is interact with the
@@ -126,7 +161,10 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     $('#someInput').prop('disabled', true);  -> <input id="someInput" type="number" disabled>
 
     Enable *all* fields on this form.
+===================== */
+$('input').prop('disabled', false)
 
+/* =====================
   Task 5: Add a button trigger to log this form's object to console
     We now can enter data through the HTML and create an object to represent that data. Add a button
     click event to the button at the bottom of your form. This means that we want to use jQuery to
@@ -137,25 +175,72 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     until the event on which it is bound is triggered.
 
     P.S. Checkboxes might confuse you. Try to use google to figure out what's going wrong.
+===================== */
+$('button').click(function(){console.log(getform('.sidebar'))});
 
+/* =====================
   Task 6: Plot input data to the map on button click
     Modify this form to include at least a lat (number), long (number), description (text), and
     color (color) inputs. With these inputs you should be able to plot a circle marker
     (http://leafletjs.com/reference.html#circlemarker) to the lat/long on the form, with the color
     provided, and a bound popup which gives you the description.
+===================== */
+$('button').before(`
+  <br>
+  Lat: <input type="text" id="lat-input"><br>
+  Lon: <input type="text" id="lon-input"><br>
+  <br>
+`);
+$('#lat-input').val('39.952253');
+$('#lon-input').val('-75.192674');
 
+$('button').click(function(){
+
+  let stuff = getform('.sidebar');
+  let lon = stuff['lon-input'];
+  let lat = stuff['lat-input'];
+  let color = stuff['color-input'];
+
+  let popup = "";
+  Object.keys(stuff).forEach(function(key) {
+    if (key != "lat-input" &&
+        key != "lon-input" &&
+        key != "color-input") {
+      popup += `${key}: ${stuff[key]}<br>`
+    }
+  });
+
+  map.setView([lat,lon], 14)
+  L.circleMarker(
+    [lat,lon],
+    radius = 1,
+    fillColor = color,
+  ).addTo(map
+  ).bindPopup(popup);
+});
+
+/* =====================
   // STRETCH GOALS
+  ===================== */
+
+/* =====================
   Task 7: Use default values - OPTIONAL
     We don't want the application to crash if our user fails to enter values for every field. Add
     whatever logic is necessary to set default values if a field is empty.
+    ===================== */
+// no need, jQuery takes blank inputs as an empty string
 
+/* =====================
   Task 8: Try Leaflet's divIcon
     Instead of using a default leaflet marker or a circleMarker, try using a L.divIcon. A div icon
     is just an HTML <div> element on which CSS can be applied (HINT: background-color or
     background-image are necessary if you want to see the icon). When you've successfully implemented
     a divIcon, you should be able to grab it by reference to its class: 'leaflet-marker-icon'. So,
     in jQuery, $('.leaflet-marker-icon').
+===================== */
 
+
+/* =====================
   Task 9: Make a parametric function (one that accepts parameters/arguments) to fill the form out.
     At this point, we have an object which corresponds to a (at least partially) filled out form.
     That being so, we should be able to write a function that accepts, as an argument,
@@ -170,6 +255,6 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // This is a popular pattern that you'll run into in programs that run jQuery. It says not to run
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
-$(document).ready(function() {
+
   // Do your stuff here
 });
