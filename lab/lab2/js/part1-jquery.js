@@ -67,7 +67,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
         Writing: $(someSelector).val(valueToSet);  // This sets the value
 
     jQuery().text();
-      With no arguments, `val` queries an html element for its contained text (not usable to get an
+      With no arguments, `text` queries an html element for its contained text (not usable to get an
       input's value!). Provided a string as an argument, it will actually set that string as the html
       element's new text.
 
