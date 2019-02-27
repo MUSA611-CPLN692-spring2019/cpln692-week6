@@ -9,9 +9,14 @@
   <body>
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- =====================
-      Add elements in this space
-      ====================== -->
+      <label id="url-lab" for="url">URL: </label>
+      <input id="url" type="text" style="width:100%;" value="http://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-bike-crashes-snippet.json"></input>
+      <label id="lat-lab" for="lat">Latitude key name: </label>
+      <input id="lat" type="text" style="width:100%;" value="lat_final"></input>
+      <label id="long-lab" for="long">Longitude key name: </label>
+      <input id="long" type="text" style="width:100%;" value="long_final"></input>
+      <button id="map-button" style="margin-top:20px;">Map</button>
+      <button id="clear" style="margin-top:20px;">Clear</button>
     </div>
     <!-- Map -->
     <div id="map" class="map"></div>
