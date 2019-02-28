@@ -75,79 +75,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
         Reading: $(someSelector).text();  // This gets the current value
         Writing: $(someSelector).text(textToSet);  // This sets the value
 
-
-  Task 1: Using javascript, change the HTML to create useful labels for our UI
-    *NOTE*: Do not edit part1-jquery.html. You should be able to change the text of an HTML element
-            with jQuery alone! Try this: $(<selector>).text('text to set');
-
-    Let's change the labels of our input elements so that they're meaningful. We don't want the
-    page to say 'This is the first text input'. Instead we should imagine useful inputs and label
-    accordingly. Be sure that the labels you choose make sense for the element types provided. A
-    checkbox has only two states: on and off. This is useful for boolean values (e.g. isDoctor,
-    hasHair). Text fields allow for more complex representations (e.g. name, address). Numeric fields
-    are specialized to only allow numeric values (possible interpretations include: ageInYears, pointsScored).
-    The color field is specialized to use HTML5 colorpickers provided by each browser and store data
-    as a string in hexadecimal color format (i.e. '#ffffff'); suitable representations include e.g.
-    hairColor, markerColor.
-
-    Try to imagine a single object that you're describing. For example, if your object is "person",
-    you might want to include a name, an address, an age, a couple of boolean characteristics, and a
-    favorite color. Don't spend too much time on thinking about the perfect object to represent with
-    this form, just about anything will do.
-
-  Task 2: Setting (writing) input values
-    *NOTE*: An input's value is not the same as an HTML element's text. We use $(selector).val() as
-            opposed to $(selector).text() in this case.
-
-    Fill out the input form with some imagined values. If you chose to make the form about the
-    properties of people, the name might be 'bob' and the favorite color could be green (hint: you'll
-    want to get formatting exactly right to set a color field; experiment in the console to see what
-    the color you'll specify should look like).
-
-  Task 3: Getting (reading) input values
-    Write the code necessary to read from your input form and return a javascript object (with keys
-    to clarify the meaning of each value) that has all the data that's stored in your form.
-
-  Task 4: Enable user interaction with the form
-    At this point, we're really only using HTML input fields as a kind of storage. We create some data,
-    put that data on the DOM, and read it back out. What we really want to do is interact with the
-    form we've created as part of a GUI (Graphical User Interface - pronounced like 'gooey'). To do
-    this, we can use another jQuery method: 'prop'.
-
-    Here's a simple, disabled input field:
-    <input id="someInput" type="number" disabled>
-
-    You can see in this HTML that the input field is disabled. You could also see this by querying
-    that property's value through jQuery:
-    $('#someInput').prop('disabled');
-
-    Setting the property's value is just slightly more involved:
-    $('#someInput').prop('disabled', false); -> <input id="someInput" type="number">
-    $('#someInput').prop('disabled', true);  -> <input id="someInput" type="number" disabled>
-
-    Enable *all* fields on this form.
-
-  Task 5: Add a button trigger to log this form's object to console
-    We now can enter data through the HTML and create an object to represent that data. Add a button
-    click event to the button at the bottom of your form. This means that we want to use jQuery to
-    bind your input-reading function (what you did in task 3) to the button's 'click' event.
-    Here's the documentation for click: https://api.jquery.com/click/
-
-    Keep in mind that events are asynchronous, just like ajax. The function you bind is not called
-    until the event on which it is bound is triggered.
-
-    P.S. Checkboxes might confuse you. Try to use google to figure out what's going wrong.
-
-  Task 6: Plot input data to the map on button click
-    Modify this form to include at least a lat (number), long (number), description (text), and
-    color (color) inputs. With these inputs you should be able to plot a circle marker
-    (http://leafletjs.com/reference.html#circlemarker) to the lat/long on the form, with the color
-    provided, and a bound popup which gives you the description.
-
   // STRETCH GOALS
-  Task 7: Use default values - OPTIONAL
-    We don't want the application to crash if our user fails to enter values for every field. Add
-    whatever logic is necessary to set default values if a field is empty.
 
   Task 8: Try Leaflet's divIcon
     Instead of using a default leaflet marker or a circleMarker, try using a L.divIcon. A div icon
@@ -171,5 +99,136 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
-  // Do your stuff here
+
+  /*
+  Task 1: Using javascript, change the HTML to create useful labels for our UI
+    *NOTE*: Do not edit part1-jquery.html. You should be able to change the text of an HTML element
+            with jQuery alone! Try this: $(<selector>).text('text to set');
+
+    Let's change the labels of our input elements so that they're meaningful. We don't want the
+    page to say 'This is the first text input'. Instead we should imagine useful inputs and label
+    accordingly. Be sure that the labels you choose make sense for the element types provided. A
+    checkbox has only two states: on and off. This is useful for boolean values (e.g. isDoctor,
+    hasHair). Text fields allow for more complex representations (e.g. name, address). Numeric fields
+    are specialized to only allow numeric values (possible interpretations include: ageInYears, pointsScored).
+    The color field is specialized to use HTML5 colorpickers provided by each browser and store data
+    as a string in hexadecimal color format (i.e. '#ffffff'); suitable representations include e.g.
+    hairColor, markerColor.
+
+    Try to imagine a single object that you're describing. For example, if your object is "person",
+    you might want to include a name, an address, an age, a couple of boolean characteristics, and a
+    favorite color. Don't spend too much time on thinking about the perfect object to represent with
+    this form, just about anything will do.
+  */
+  $('#main-heading').text('Rating Food')
+  $('#text-label1').text('Name:')
+  $('#text-label2').text('Description:')
+  $('#text-label3').text('Location (lon,lat):')
+  $('#number-label').text('Rating (1 to 5):')
+  $('#checkbox-label1').text('Easy to Park? ')
+  $('#checkbox-label2').text('Need Reservation? ')
+  $('#color-label').text('Pick a Color')
+  $('button').text('Let\'s Map It')
+
+  /*
+  Task 2: Setting (writing) input values
+    *NOTE*: An input's value is not the same as an HTML element's text. We use $(selector).val() as
+            opposed to $(selector).text() in this case.
+
+    Fill out the input form with some imagined values. If you chose to make the form about the
+    properties of people, the name might be 'bob' and the favorite color could be green (hint: you'll
+    want to get formatting exactly right to set a color field; experiment in the console to see what
+    the color you'll specify should look like).
+  */
+  $('#text-input1').val('Gyu-Kaku')
+  $('#text-input2').val('All-you-can-eat Japanese BBQ')
+  $('#text-input3').val('39.9607597,-75.1701172')
+  $('#color-input').val('#40e0d0')
+  $('#cbox-input1').prop('checked', true)
+  $('#cbox-input2').prop('checked', true)
+
+  /*
+  Task 3: Getting (reading) input values
+    Write the code necessary to read from your input form and return a javascript object (with keys
+    to clarify the meaning of each value) that has all the data that's stored in your form.
+  */
+
+  var name = $('#text-input1').val();
+  var description = $('#text-input2').val();
+  var location = $('#text-input3').val();
+  var rating = $('#numeric-input').val();
+  var parking = $('#cbox-input1').val();
+  var reservation = $('#cbox-input2').val();
+  var color = $('#color-input').val();
+
+
+  /*
+    Task 4: Enable user interaction with the form
+      At this point, we're really only using HTML input fields as a kind of storage. We create some data,
+      put that data on the DOM, and read it back out. What we really want to do is interact with the
+      form we've created as part of a GUI (Graphical User Interface - pronounced like 'gooey'). To do
+      this, we can use another jQuery method: 'prop'.
+
+      Here's a simple, disabled input field:
+      <input id="someInput" type="number" disabled>
+
+      You can see in this HTML that the input field is disabled. You could also see this by querying
+      that property's value through jQuery:
+      $('#someInput').prop('disabled');
+
+      Setting the property's value is just slightly more involved:
+      $('#someInput').prop('disabled', false); -> <input id="someInput" type="number">
+      $('#someInput').prop('disabled', true);  -> <input id="someInput" type="number" disabled>
+
+      Enable *all* fields on this form.
+  */
+  var inputs = ["#text-input1", "#text-input2", "#text-input3", "#numeric-input",
+  '#cbox-input1', '#cbox-input2', '#color-input'];
+  _.each(inputs, function(input){
+    $(input).prop('disabled', false);
+  });
+
+  /*
+    Task 5: Add a button trigger to log this form's object to console
+      We now can enter data through the HTML and create an object to represent that data. Add a button
+      click event to the button at the bottom of your form. This means that we want to use jQuery to
+      bind your input-reading function (what you did in task 3) to the button's 'click' event.
+      Here's the documentation for click: https://api.jquery.com/click/
+
+      Keep in mind that events are asynchronous, just like ajax. The function you bind is not called
+      until the event on which it is bound is triggered.
+
+      P.S. Checkboxes might confuse you. Try to use google to figure out what's going wrong.
+  */
+
+  /*
+  Task 6: Plot input data to the map on button click
+    Modify this form to include at least a lat (number), long (number), description (text), and
+    color (color) inputs. With these inputs you should be able to plot a circle marker
+    (http://leafletjs.com/reference.html#circlemarker) to the lat/long on the form, with the color
+    provided, and a bound popup which gives you the description.
+  */
+  $('button').click(function(){
+    name = $('#text-input1').val();
+    description = $('#text-input2').val();
+    location = $('#text-input3').val();
+    rating = $('#numeric-input').val();
+    parking = false;
+    reservation = false;
+    if($('#cbox-input1').prop('checked') == true) {
+      parking == true;
+    }
+    if($('#cbox-input2').prop('checked') == true) {
+      reservation == true;
+    }
+    color = $('#color-input').val();
+
+    console.log(name, description, location, rating, parking, reservation, color);
+    var markerOptions = { color: color, radius: rating*5 }
+    var marker = L.circleMarker(L.latLng(parseFloat(location.split(',')[0]),parseFloat(location.split(',')[1])), markerOptions);
+    var popup = '<b>' + name + "</b><br><i>" + description + "</i><br><br>My rating is: " + rating;
+    marker.bindPopup(popup).addTo(map);
+  });
+
+
 });
