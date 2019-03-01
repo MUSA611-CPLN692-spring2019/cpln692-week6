@@ -13,6 +13,60 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
   ext: 'png'
 }).addTo(map);
 
+
+
+
+$('#text-label1').text('Name');
+$('#text-label2').text('Address');
+$('#text-label3').text('Cuisine Type');
+$('#number-label1').text('Long');
+$('#number-label2').text('Lat');
+$('#checkbox-label1').text('Open Now');
+$('#checkbox-label2').text('Order Delivery');
+$('#color-label').text('Color Code');
+$('button').text('Map it Out');
+
+$('#text-input1').val('Vernick');
+$('#text-input2').val('2031 Walnut St, Philadelphia, PA 19103');
+$('#text-input3').val('New American');
+$('#numeric-input1').val(-75.174833);
+$('#numeric-input2').val(39.951306);
+$('#color-input').val('#ff9900');
+
+
+
+var inputID = ['#text-input1','#text-input2','#text-input3','#numeric-input1','#numeric-input2'];
+var i;
+var dataInput = {};
+/*_.each(inputID, function(){
+  $(inputID).prop('disabled', false);
+}); this didn't work
+*/
+for (i=0; i<inputID.length; i++) {
+  $(inputID[i]).prop('disabled', false);
+}
+
+var dataRead = function() {
+  dataInput = {name: $('#text-input1').val(),
+                address:$('#text-input2').val(),
+                type:$('#text-input3').val(),
+                long:$('#numeric-input1').val(),
+                lat:$('#numeric-input2').val(),
+                color:$('#color-input').val()};
+};
+
+$('button').click(function() {
+  dataRead();
+  console.log(dataInput);
+  L.circleMarker([dataInput.lat, dataInput.long],{radius:12, stroke: false,
+    fillColor:dataInput.color, fillOpacity: 0.8})
+  .bindPopup(dataInput.type)
+  .addTo(map);
+});
+
+
+
+
 /* =====================
   Lab - jQuery
 
