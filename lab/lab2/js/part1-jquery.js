@@ -172,4 +172,61 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+//Task1
+$('#main-heading').text('CRIME INFO');
+    $('#text-label1').text('Name');
+    $('#text-label2').text('Sex');
+    $('#text-label3').text('Crime Type');
+    $('#number-label').text('Record Number');
+    $('#checkbox-label1').text('Graduated form High School');
+    $('#checkbox-label2').text('Drinking');
+    $('#color-label').text('The Color of Eyes');
+    $('button').text('Search');
+
+//Task2
+   $('#text-input1').val('Rocky');
+   $('#text-input2').val('Male');
+   $('#text-input3').val('ASSUALTED');
+   $('#numeric-input').val('17820372898');
+   $('#cbox-input1').prop('checked',true);
+   $('#cbox-input2').prop('checked',true);
+   $('#color-input').val('#ffffff');
+
+//Task3
+   var name = $('#text-input1').val();
+   var sex = $('#text-input2').val();
+   var crimeType = $('#text-input3').val();
+   var recordNumber = $('#numeric-input').val();
+   var ifGraduated = $('#cbox-input1').val();
+   var ifDrinking = $('#cbox-input2').val();
+   var eyeColor = $('#color-input').val();
+
+//Task4
+     $('#text-input1').prop('disabled',false);
+     $('#text-input2').prop('disabled',false);
+     $('#text-input3').prop('disabled',false);
+     $('#numeric-input').prop('disabled',false);
+     $('#cbox-input1').prop('disabled',false);
+     $('#cbox-input2').prop('disabled',false);
+
+//Task5
+     $('button').click(function(){
+       name = $('#text-input1').val();
+       sex = $('#text-input2').val();
+       type = $('#text-input3').val();
+       recordNumber = $('#numeric-input').val();
+       eyecolor = $('#color-input').val();
+     });
+
+
+//Task6
+     $('#text-label1').text('Latitude of Crime Spot');
+     $('#text-label2').text('Longitude of Crime Spot');
+     $('#text-label3').text('Crime Type');
+     $('#text-input1').val('39.953567');
+     $('#text-input2').val('-75.182673');
+     $('#text-input3').val('ASSUALTED');
+     $('button').click(function(){
+       L.circleMarker([$('#text-input1').val(),$('#text-input2').val()]).bindPopup($('#text-input3').val()).addTo(map);
+     })
 });
