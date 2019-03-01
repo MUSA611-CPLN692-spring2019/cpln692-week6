@@ -172,4 +172,77 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+  $('#main-heading').text("Philly Bike Crash");//task1
+  $('#text-label1').text("Title Name"); //task1
+  $('#text-input1').val("Type in a Title Here"); //task2
+
+  $('#text-label2').text("Person Name");//task1
+  $('#text-input2').val("Type in Name");//task2
+
+  $('#text-label3').text("Street Name");//task1
+  $('#text-input3').val("Type in Street Name");//task2
+
+  $('#number-label').text("Year");//task1
+  $('#numeric-input').val("2018");//task2
+
+  $('#checkbox-label1').text("Drinking");//task1
+  $('#cbox-input1').prop('checked', true);//task2
+
+  $('#checkbox-label2').text("Speeding");//task1
+  $('#cbox-input2').prop('checked', true);//task2
+
+  $('#color-label').text("Choose marker color");//task1
+  $('#color-input').val('#f442d9');//task2
+
+/*  Task 3: Getting (reading) input values
+    Write the code necessary to read from your input form and return a javascript object (with keys
+    to clarify the meaning of each value) that has all the data that's stored in your form. */
+    var titlename = $('#text-input1').val();
+    var person = $('#text-input2').val();
+    var address = $('#text-input3').val();
+    var year = $('#numeric-input').val();
+    var drinking = $('#cbox-input1').val();
+    var speeding = $('#cbox-input2').val();
+    var color = $('#color-input').val();
+
+//task 4 Enable user interaction with the form
+// Setting the property's value is just slightly more involved:
+// $('#someInput').prop('disabled', false); -> <input id="someInput" type="number">
+// $('#someInput').prop('disabled', true);  -> <input id="someInput" type="number" disabled>
+var userinputs = ["#text-input1", "#text-input2", "#text-input3", "#numeric-input",'#cbox-input1', '#cbox-input2', '#color-input'];
+_.each(userinputs, function(input){
+  $(input).prop('disabled', false);
+});
+
+//task 5: add a button
+$('button').click(function(){
+    titlename = $('#text-input1').val();
+    person= $('#text-input2').val();
+    address = $('#text-input3').val();
+    year = $('#numeric-input').val();
+    drinking = false;
+    speeding = false;
+    if($('#cbox-input1').prop('checked') == true) {
+      drinking == true;
+    }
+    if($('#cbox-input2').prop('checked') == true) {
+      speeding == true;
+    }
+    color = $('#color-input').val();
+});
+
+//circle markers
+// Modify this form to include at least a lat (number), long (number), description (text), and
+// color (color) inputs. With these inputs you should be able to plot a circle marker
+// (http://leafletjs.com/reference.html#circlemarker) to the lat/long on the form, with the color
+// provided, and a bound popup which gives you the description.
+$('#lat').text("latitude");//task1
+$('#lat').val("lat"); //task2
+$('#lng').text("longitude"); //task1
+$('#lng').val("lng"); //task2
+$('#text-desc').text("Description");
+$('#text-desc').val("Description"); //task2
+var lat = $('#lat').val();
+var lng = $('#lng').val();
+var description = $('#text-desc').val();
 });

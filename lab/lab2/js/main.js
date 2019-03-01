@@ -3,15 +3,8 @@
 ===================== */
 /* =====================
   Lab 2, part 2 - application state*/
-  $("#url").val("https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json");
-  $('#LAT').val('latitude');
-  $('#LNG').val('longitude');
-  var url = $('#url').val();
-  var lat = $('#LAT').val();
-  var lon = $('#LNG').val();
-
-
 var downloadData= $.ajax("https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-bike-crashes-snippet.json");
+
 var parseData = function(webdata) {
   return JSON.parse(webdata);
 };
@@ -56,6 +49,7 @@ var removeMarkers = function(markers) {
 /* =====================
  Leaflet setup - feel free to ignore this
 ===================== */
+
 var map = L.map('map', {
   center: [39.9522, -75.1639],
   zoom: 14

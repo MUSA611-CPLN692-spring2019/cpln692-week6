@@ -1,3 +1,17 @@
+<!-- #### Task 2
+
+In your index.html file, add four elements:
+
+1. Text input field, which will represent the URL of your dataset
+2. Text input field, which will represent the latitude key in your data
+3. Text input field, which will represent the longitude key in your data
+4. Button, which will run your script
+
+Regarding the latitude and longitude keys: remember that each dataset has its
+own key or label for these values. For example,
+[philadelphia bike crashes](https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-bike-crashes-snippet.json)
+uses LAT and LNG while -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,6 +26,23 @@
       <!-- =====================
       Add elements in this space
       ====================== -->
+      <div>
+        <input id="url"></input> <!--STEP1. input url-->
+      </div>
+
+      <div>
+        <input id="LAT"></input> <!--STEP2.3. Lat and long-->
+      </div>
+
+      <div>
+        <input id="LNG"></input>
+      </div>
+
+      <hr>
+      <button id="bnt">Click to View Bike Crash Locations</button> <!--STEP4. add buttom-->
+      <br>
+      <button id="bnt_Clear">Clear</button>
+
     </div>
     <!-- Map -->
     <div id="map" class="map"></div>
