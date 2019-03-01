@@ -1,4 +1,8 @@
 /* =====================
+   You should NOT need to change this file (though you are not forbidden from doing so)
+===================== */
+
+/* =====================
   Call getAndParseData to grab our dataset through a jQuery.ajax call ($.ajax)
 ===================== */
 getAndParseData();
@@ -7,19 +11,18 @@ getAndParseData();
   The code here is triggered when you click on the button with ID #my-button
   ALL functions called here will be called EVERY time a click event fires
 ===================== */
-$('button#my-button').click(function(e) {
-  debugger;
-  appState.numericField1 = $('#num1').val();
-  console.log("numericField1", appState.numericField1);
+/*$('button#my-button').click(function(e) {
+  numericField1 = $('#num1').val();
+  console.log("numericFieldMin", numericField1);
 
-  appState.numericField2 = $('#num2').val();
-  console.log("numericField2", appState.numericField2);
+  numericField2 = $('#num2').val();
+  console.log("numericFieldMax", numericField2);
 
-  appState.booleanField = $('#boolean')[0].checked;
-  console.log("booleanField", appState.booleanField);
+  booleanField = $('#boolean')[0].checked;
+  console.log("booleanField", booleanField);
 
-  appState.stringField = $('#string').val();
-  console.log("stringField", appState.stringField);
+  stringField = $('#string').val();
+  console.log("stringField", stringField);*/
 
 
   /* =====================

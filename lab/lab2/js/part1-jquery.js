@@ -170,6 +170,91 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // This is a popular pattern that you'll run into in programs that run jQuery. It says not to run
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
+
+
+// 1. A repetitive way to finish the tasks
+
 $(document).ready(function() {
-  // Do your stuff here
+/* ==================
+Task 1 change the HTML to create useful labels for our UI
+==========================*/
+   $('#text-label1').text("Address");
+   $('#text-label2').text("Name");
+   $('#text-label3').text("Coordinates");
+   $('#number-label').text("Year Built");
+   $("#checkbox-label1").text("Was it built before 2010?")
+   $("#checkbox-label2").text("Is it located in zipcode < 19150 area?")
+   $("#color-label").text("Mark your choice with a color")
+   $(":button").text("Finish")
+
+/* =======================
+Task 2 Setting (writing) input values
+====================== */
+  $('#text-input1').val("8947 Leonard Street");
+  $('#text-input2').val("Hasty Residence");
+  $('#text-input3').val("40.071117,-75.034256");
+  $('#numeric-input').val(2009);
+
+  $("#cbox-input1").prop('checked',true);
+  $("#cbox-input2").prop('checked',true);
+  $("#color-input").val("#325462")
+
+/* ==========================
+Task 3: Getting (reading) input values
+  Write the code necessary to read from your input form and return a javascript object (with keys
+  to clarify the meaning of each value) that has all the data that's stored in your form.
+========================= */
+  var read = function() {
+    var inputs = {add:$('#text-input1').val(),
+                  name:$('#text-input2').val(),
+                  coords:$('#text-input3').val(),
+                  year:$('#numeric-input').val(),
+                  before10:  $('#cbox-input1').val(),
+                  zipcodeSmallerthan19150:  $('#cbox-input2').val(),
+                  color:$('#color-input').val()
+    }
+  //  console.log('test')
+    return inputs
+  }
+
+
+  /* ====================================
+    Task 4: Enable user interaction with the form
+    ====================================*/
+    var inputlabels = ['#text-input1','#text-input2','#text-input3','#numeric-input',
+  '#cbox-input1','#cbox-input2'];
+    for (let i = 0; i< inputlabels.length; i++) {
+      $(inputlabels[i]).prop('disabled', false);
+    }
+
+    /* ====================================
+      Task 5:  Add a button trigger to log this form's object to console
+      ====================================*/
+      $( 'button' ).click(function() {
+        var data = read();
+        console.log(data);
+  /* ==============================
+  Task 6: Plot input data to the map on button click
+    Modify this form to include at least a lat (number), long (number), description (text), and
+    color (color) inputs. With these inputs you should be able to plot a circle marker
+    (http://leafletjs.com/reference.html#circlemarker) to the lat/long on the form, with the color
+    provided, and a bound popup which gives you the description.
+    =============================*/
+        let lat = parseFloat(data.coords.split(',')[0])
+        let lon = parseFloat(data.coords.split(',')[1])
+        map.setView([lat,lon],14)
+        var marker = L.circleMarker([lat,lon],{radius:20,color:data.color,fill:data.color,opacity:1});
+
+      /*  console.log(data.coords);
+        console.log(data.name);
+        console.log(data.year);
+        console.log(marker);
+        console.log('test2'); */
+        var popup = '<p><strong>'+data.name+'</strong><br><em>'+data.year+'</em></p>';
+        marker.bindPopup(popup).addTo(map);
+      //the solar station is located close to Jenkinton
+});
+
+
+    // Do your stuff here
 });
