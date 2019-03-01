@@ -199,7 +199,7 @@ $('button').click(function(){
   let stuff = getform('.sidebar');
   let lon = stuff['lon-input'];
   let lat = stuff['lat-input'];
-  let color = stuff['color-input'];
+  let col = stuff['color-input'];
 
   let popup = "";
   Object.keys(stuff).forEach(function(key) {
@@ -211,11 +211,12 @@ $('button').click(function(){
   });
 
   map.setView([lat,lon], 14)
-  L.circleMarker(
-    [lat,lon],
-    radius = 1,
-    fillColor = color,
-  ).addTo(map
+  L.circleMarker([lat,lon],{
+    radius : 5,
+    color : col,
+    fillColor : col,
+    opacity : 1
+  }).addTo(map
   ).bindPopup(popup);
 });
 
