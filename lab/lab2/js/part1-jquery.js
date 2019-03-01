@@ -171,5 +171,80 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
+
   // Do your stuff here
+  //Task 1: Create useful labels
+  $("#main-heading").text("School search");
+  $("#text-label1").text("School name");
+  $("#text-label2").text("Neighborhood");
+  $("#text-label3").text("Lat/Lon");
+  $("#number-label").text("Highest grade served");
+  $("#checkbox-label1").text("Is a public school");
+  $("#checkbox-label2").text("Is a charter school");
+  $("#color-label").text("Marker color");
+  $("button").text("Identify school on map");
+
+
+  //Task 2: Setting (writing) input values
+  $("#text-input1").val("Independence Charter School");
+  $("#text-input2").val("Rittenhouse Square");
+  $("#text-input3").val("39.945882, -75.166403");
+  $("#numeric-input").val("8");
+  $("#cbox-input1").prop("checked", true);
+  $("#cbox-input2").prop("checked", true);
+  $("#color-input").val("#001a66");
+
+
+  //Task 3: Getting (reading) input values (in the form of a javascript object with keys i.e., dictionary object)
+  var inputObject = {
+    txt1 : $("#text-input1").val(),
+    txt2 : $("#text-input2").val(),
+    txt3 : $("#text-input3").val(),
+    num : $("#numeric-input").val(),
+    box1 : $("#cbox-input1").val(),
+    box2 : $("#cbox-input2").val(),
+    col : $("#color-input").val(),
+  }
+
+
+//Task 4: Enable user interaction with the form - all fields anabled
+$("#text-input1").prop('disabled', false);
+$("#text-input1").prop('disabled', false);
+$("#text-input2").prop('disabled', false);
+$("#text-input3").prop('disabled', false);
+$("#numeric-input").prop('disabled', false);
+$("#cbox-input1").prop('disabled', false);
+$("#cbox-input2").prop('disabled', false);
+$("#color-input").prop('disabled', false);
+
+
+//Task 5: Add a button trigger to log this form's object to console
+$("button").click(function() {
+  //put input dictionary object into a variable to store when button is clicked
+  var input = inputObject;
+  //print input variable on console to check if it works
+  console.log(inputObject);
+});
+
+
+//Task 5: Add a button trigger to log this form's object to console
+$("button").click(function() {
+  //put input dictionary object into a variable to store when button is clicked
+  var input = inputObject;
+  //split lat/lon values and put it into a list
+  var location = inputObject["txt3"].split(",");
+  console.log(location);
+  //get latitude
+  var lat = location[0];
+  console.log(lat);
+  //get longitude
+  var lon = location[1];
+  console.log(lon);
+  //color value
+  var marker_color = inputObject["col"]
+  console.log(marker_color);
+  //add marker to map
+  L.marker([lat, lon], {color: marker_color}).addTo(map).inputObject("txt1").openPopup();
+});
+
 });
