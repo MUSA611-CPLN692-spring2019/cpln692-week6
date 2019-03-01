@@ -33,6 +33,7 @@ var plotData = function() {
       conditionStatus = conditionStatus && datum['General Crime Category'].toUpperCase().includes(appState.stringField.toUpperCase());
     }
     return conditionStatus;
+    return debugger;
   };
 
   var filtered = _.filter(appState.data, filterPredicate);
