@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <!-- CSS Imports -->
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/leaflet.css" />
@@ -8,10 +9,43 @@
   </head>
   <body>
     <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- =====================
-      Add elements in this space
-      ====================== -->
+    <div id="sidebar">
+      <div id="main">
+        <div id="heading">
+          <h3>Plot JSON</h3>
+          <p class="more-button">more settings</p>
+        </div>
+        <p class="message initial">Quickly visualize points from JSON format.</p>
+        <p>
+          <input id="JSON" placeholder="Paste URL here." value="https://www.pasda.psu.edu/json/SEPTAGISHighspeedStations2012.geojson">
+        </p>
+      </div>
+      <div id="more">
+        <p>
+          Points not showing? <br>
+          Choose the correct labels <br>
+          for coordinate data here.</p>
+        <p>
+          <select class="coord" id="coord-y">
+            <option value="" class="auto" disabled selected>Latitude:</option>
+            <option value="Y">Y</option>
+            <option value="LAT">LAT</option>
+            <option value="LATITUDE">LATITUDE</option>
+            <option value="LATTITUDE">LATTITUDE</option>
+          </select>
+          <select class="coord" id="coord-x">
+            <option value="" class="auto" disabled selected>Longitude:</option>
+            <option value="X">X</option>
+            <option value="LON">LON</option>
+            <option value="LNG">LNG</option>
+            <option value="LONG">LONG</option>
+            <option value="LONGITUDE">LONGITUDE</option>
+          </select>
+          <p class="checkwrap">
+            <input type="checkbox" id="auto" name="auto" selected checked>
+            <label for="auto">Pick lat/lng labels for me</label>
+          </p>
+      </div>
     </div>
     <!-- Map -->
     <div id="map" class="map"></div>

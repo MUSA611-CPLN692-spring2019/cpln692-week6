@@ -58,12 +58,38 @@
 
     ====================== -->
 
+
     <!-- Sidebar -->
     <div class="sidebar">
 
-      <!-- =====================
-      Add HTML!
-      ====================== -->
+      <div class="lid">
+        <h3>Filters</h3>
+        <h3 class="x">✕</h3>
+      </div>
+
+      <div class="panel"><form id="filter">
+
+        <p>
+          <label for="f-name">By Name</label><br>
+          <input type="text" name="f-name" id="f-name" />
+        </p>
+
+        <p>
+          <label for="f-grade">By Grade</label><br>
+          <select name="f-grade" id="f-grade">
+          </select>
+        </p>
+
+      </form></div>
+
+      <hr />
+
+      <div class="lid">
+        <h3>Schools</h3>
+        <h3 class="x">✕</h3>
+      </div>
+
+      <div class="panel" id="schools"></div>
 
     </div>
     <!-- Map -->
@@ -79,6 +105,7 @@
            access to "data/phillySchools.js"    -->
 
     <!-- Javascript Code -->
+
     <script>
       var map = L.map('map', {
         center: [39.9522, -75.1639],
@@ -92,5 +119,8 @@
       	ext: 'png'
       }).addTo(map);
     </script>
+
+    <script src="data/phillySchools.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
