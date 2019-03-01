@@ -171,5 +171,59 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
-  // Do your stuff here
+//task-1
+  $('#text-label1').text('Your Name');
+  $('#text-label2').text('Your Plate Number');
+  $('#text-label3').text('Your Estimated Arrival Time');
+  $('#number-label').text('Your Phone Number');
+  $('#checkbox-label1').text('Pay in Credit Card');
+  $('#checkbox-label2').text('Text You the Assigned Spot');
+  $('#color-label').text('The Color of Your Car');
+  $('button').text('Reserve Now');
+//task-2
+  $('#text-input1').val('Kate');
+  $('#text-input2').val('KK1122');
+  $('#text-input3').val('1:30 pm');
+  $('#numeric-input').val('221212222');
+  $('#cbox-input1').prop('checked',true);
+  $('#cbox-input2').prop('checked',true);
+  $('#color-input').val('#123456');
+//task-3
+  var userName = $('#text-input1').val();
+  var plateNumber = $('#text-input2').val();
+  var estimatedArrivalTime = $('#text-input3').val();
+  var phoneNumber = $('#numeric-input').val();
+  var ifCreditCard = $('#cbox-input1').val();
+  var ifTextSpot = $('#cbox-input2').val();
+  var carColorCode = $('#color-input').val();
+//task-4
+  $('#text-input1').prop('disabled',false);
+  $('#text-input2').prop('disabled',false);
+  $('#text-input3').prop('disabled',false);
+  $('#numeric-input').prop('disabled',false);
+  $('#cbox-input1').prop('disabled',false);
+  $('#cbox-input2').prop('disabled',false);
+  $('#color-input').prop('disabled',false);
+//task-5
+  $('button').click(function(){
+    console.log(`Your parking reservation is successful!
+      Name: ${userName}
+      Plate Number: ${plateNumber}
+      Estimated Arrival Time: ${estimatedArrivalTime}
+      Phone Number: ${phoneNumber}`);
+  });
+//task-6
+  $('#text-label1').text('The Latitude of Parking Lot');
+  $('#text-label2').text('The Longitude of Parking Lot');
+  $('#color-label').text('The Color of Parking Lot');
+  $('#text-input1').val('39.952515');
+  $('#text-input2').val('-75.187879');
+  $('color-input').val('#111111');
+  $('button').click(function(){
+    var lat = $('#text-input1').val();
+    var long = $('#text-input2').val();
+    var color = $('#color-input').val();
+    var markerColor = {color: color}
+    L.circleMarker([lat,long], markerColor).bindPopup('This is the parking lot you choose').addTo(map);
+  })
 });
