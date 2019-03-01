@@ -60,10 +60,47 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
+      <div class="heading">
+        <h2 class="button">x</h2>
+        <h2 class="filter">Filters</h2> <div style="clear: both"></div>
+      </div>
+      <p><div class="type">By Name</div>
+        <input type="text">
+      </p>
+      <p><div class="type">By Grade</div>
+      <select name="All Grades">
+        <option value="all grades">All Grades</option>
+        <option value="elementary">Elementary School</option>
+        <option value="middle">Middle School</option>
+        <option value="high">High School</option>
+      </select></p>
+      <br>
 
-      <!-- =====================
-      Add HTML!
-      ====================== -->
+      <hr>
+      <div class="heading">
+        <h2>Schools</h2>
+      </div>
+
+      <div class="school" id="card1">
+        <div class="title">Henry, Charles W.</div>
+        <div class="type">Elem/Middle</div>
+        <br>
+        <div class="address">601 Carpenter La.<br>19119 - 3405</div>
+      </div>
+
+      <div class="school">
+        <div class="title">Universal Creighton Charter</div>
+        <div class="type">Elem/Middle</div>
+        <br>
+        <div class="address">5401 Tabor Ave.<br>19120 - 3614</div>
+      </div>
+
+      <div class="school">
+        <div class="title">Marshall, John</div>
+        <div class="type">Elementary School</div>
+        <br>
+        <div class="address">4500 Griscom St.<br>19124 - 3653</div>
+      </div>
 
     </div>
     <!-- Map -->
@@ -79,6 +116,12 @@
            access to "data/phillySchools.js"    -->
 
     <!-- Javascript Code -->
+
+    <script>
+      var html = document.getElementById('FACIL_ADDRESS').innerHTML;
+      document.querySelector('#card1 .address').innerHTML = html;
+    </script>
+
     <script>
       var map = L.map('map', {
         center: [39.9522, -75.1639],

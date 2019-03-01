@@ -23,120 +23,8 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
   how CSS solves the HTML reference problem (with the use of selectors) and can extend that syntax
   into our work with javascript.
 
-  A few reminders about the basic forms of CSS selector:
-  1. The simplest selector case is specification of an element's name directly. The selector "p" will grab all
-     <p> elements whereas "h1" will grab all <h1> elements.
-
-  2. An HTML element's "class" is referenced through a prefixed period. A page that has multiple movie
-     div elements in which there is a title header might look like this:
-     <div>
-       <h4 class="movie-title"></h4>
-       <div class="movie-detail"></div>
-     </div>
-     On this page, the selector ".movie-title" can be used to grab all of the elements with a
-     "movie-title" class.
-
-  3. An HTML element's "id" is referenced with a hashtag. The selector "#winning" will grab the element
-     (element is singular here - an ID should always be unique to the DOM it sits on) where
-     <element id="winning">.
-     For example:
-     <div>
-       <p id="winning">Charlie Sheen</p>
-     </div>
-     On this simple DOM, "#winning" is the id of the <p> element containing "Charlie Sheen".
-
-  4. CSS selectors can be combined to refine our meaning. In the movie-title example above, we can
-     find all and only h4 elements with the class "movie-title" with the selector "h4.movie-title"
-     which is, translated to english, "h4 elements with the class 'movie-title'".
-
-  In jQuery, we use this syntax as well. It looks like this: $(*selector*); We could, for instance,
-  grab all h4 movie-titles with $('h4.movie-title');
-
-  A NOTE ON jQuery.val vs jQuery.text:
-    Some of the exercises in this lab involve reading and writing to HTML inputs with the
-    help of jQuery selectors and associated methods for querying the DOM. Two methods you'll use again
-    and again in this lab are jQuery's `val` and `text`. It is important that you keep in mind that
-    they do very different things.
-
-    jQuery().val():
-      With no arguments, `val` queries an input value. Provided a value as an argument, it will
-      actually set that value in the <input> element.
-
-      For example:
-        Reading: $(someSelector).val();  // This gets the current value
-        Writing: $(someSelector).val(valueToSet);  // This sets the value
-
-    jQuery().text();
-      With no arguments, `val` queries an html element for its contained text (not usable to get an
-      input's value!). Provided a string as an argument, it will actually set that string as the html
-      element's new text.
-
-      For example:
-        Reading: $(someSelector).text();  // This gets the current value
-        Writing: $(someSelector).text(textToSet);  // This sets the value
 
 
-  Task 1: Using javascript, change the HTML to create useful labels for our UI
-    *NOTE*: Do not edit part1-jquery.html. You should be able to change the text of an HTML element
-            with jQuery alone! Try this: $(<selector>).text('text to set');
-
-    Let's change the labels of our input elements so that they're meaningful. We don't want the
-    page to say 'This is the first text input'. Instead we should imagine useful inputs and label
-    accordingly. Be sure that the labels you choose make sense for the element types provided. A
-    checkbox has only two states: on and off. This is useful for boolean values (e.g. isDoctor,
-    hasHair). Text fields allow for more complex representations (e.g. name, address). Numeric fields
-    are specialized to only allow numeric values (possible interpretations include: ageInYears, pointsScored).
-    The color field is specialized to use HTML5 colorpickers provided by each browser and store data
-    as a string in hexadecimal color format (i.e. '#ffffff'); suitable representations include e.g.
-    hairColor, markerColor.
-
-    Try to imagine a single object that you're describing. For example, if your object is "person",
-    you might want to include a name, an address, an age, a couple of boolean characteristics, and a
-    favorite color. Don't spend too much time on thinking about the perfect object to represent with
-    this form, just about anything will do.
-
-  Task 2: Setting (writing) input values
-    *NOTE*: An input's value is not the same as an HTML element's text. We use $(selector).val() as
-            opposed to $(selector).text() in this case.
-
-    Fill out the input form with some imagined values. If you chose to make the form about the
-    properties of people, the name might be 'bob' and the favorite color could be green (hint: you'll
-    want to get formatting exactly right to set a color field; experiment in the console to see what
-    the color you'll specify should look like).
-
-  Task 3: Getting (reading) input values
-    Write the code necessary to read from your input form and return a javascript object (with keys
-    to clarify the meaning of each value) that has all the data that's stored in your form.
-
-  Task 4: Enable user interaction with the form
-    At this point, we're really only using HTML input fields as a kind of storage. We create some data,
-    put that data on the DOM, and read it back out. What we really want to do is interact with the
-    form we've created as part of a GUI (Graphical User Interface - pronounced like 'gooey'). To do
-    this, we can use another jQuery method: 'prop'.
-
-    Here's a simple, disabled input field:
-    <input id="someInput" type="number" disabled>
-
-    You can see in this HTML that the input field is disabled. You could also see this by querying
-    that property's value through jQuery:
-    $('#someInput').prop('disabled');
-
-    Setting the property's value is just slightly more involved:
-    $('#someInput').prop('disabled', false); -> <input id="someInput" type="number">
-    $('#someInput').prop('disabled', true);  -> <input id="someInput" type="number" disabled>
-
-    Enable *all* fields on this form.
-
-  Task 5: Add a button trigger to log this form's object to console
-    We now can enter data through the HTML and create an object to represent that data. Add a button
-    click event to the button at the bottom of your form. This means that we want to use jQuery to
-    bind your input-reading function (what you did in task 3) to the button's 'click' event.
-    Here's the documentation for click: https://api.jquery.com/click/
-
-    Keep in mind that events are asynchronous, just like ajax. The function you bind is not called
-    until the event on which it is bound is triggered.
-
-    P.S. Checkboxes might confuse you. Try to use google to figure out what's going wrong.
 
   Task 6: Plot input data to the map on button click
     Modify this form to include at least a lat (number), long (number), description (text), and
@@ -172,4 +60,64 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+  $('#main-heading').text("CREEP SEARCH");
+
+  $('#text-label1').text("My Full Name");
+  $('#text-input1').val("Spartacus Consultareian");
+
+  $('#text-label2').text("Longitude pls");
+  $('#text-input2').val("-75.177397");
+
+  $('#text-label3').text("Latitude pls");
+  $('#text-input3').val("39.946984");
+
+  $('#number-label').text("SSN");
+  $('#numeric-input').val(2222222222);
+
+  $('#checkbox-label1').text("Can we get your credit card number?");
+  $('#cbox-input1').prop("checked", true);
+
+  $('#checkbox-label2').text("Can we come over?");
+  $('#cbox-input2').prop("checked", true);
+
+  $('#color-label').text("What's the color of your aura?");
+  $('#color-input').val("#008080");
+
+  $('button').text("Tracking You Down");
+
+
+  var object = {
+    name : $("#text-input1").val(),
+    long : $("#text-input2").val(),
+    lat : $("#text-input3").val(),
+    ssn : $("#numeric-input").val(),
+    cc : $("#cbox-input1").prop("checked"),
+    comeOver : $("#cbox-input2").prop("checked"),
+    color : $("#color-input").val(),
+  };
+
+  var inputs = ["#text-input1", "#text-input2", "#text-input3", "#numeric-input",
+                "#cbox-input1", "#cbox-input2", "#color-input"];
+
+  _.each(inputs, function(input) {
+    $(input).prop("disabled", false);
+  });
+
+  $("button").click(function() {
+    object = {
+      name : $("#text-input1").val(),
+      long : $("#text-input2").val(),
+      lat : $("#text-input3").val(),
+      ssn : $("#numeric-input").val(),
+      cc : $("#cbox-input1").prop("checked"),
+      comeOver : $("#cbox-input2").prop("checked"),
+      color : $("#color-input").val(),
+    };
+    console.log(object);
+    console.log(object.long);
+    var marker = L.circleMarker([object.lat, object.long], {
+      color: object.color
+    }
+    ).bindPopup(object.name + " <br>-Found You.").addTo(map);
+  });
 });
