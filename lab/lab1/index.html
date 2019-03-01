@@ -11,6 +11,7 @@
   </head>
   <body>
 
+
     <!-- =====================
 
     # Week 6 - lab 1
@@ -64,8 +65,49 @@
       <!-- =====================
       Add HTML!
       ====================== -->
+          <div class="filtersheader"> <strong> Filters </strong> </div> <!-- Creates the "Filters" text and calls it "filtersheader" through the "class=" so it can be styles in main.css. <strong> and </strong> bold the text in between -->
+          <br> <!-- Adds a break -->
+          <div> By Name </div>
+          <input type="text"> </input>
+          <br> </br>
+          <div> By Grade </div>
+          <select>
+            <option value="allgrades">All Grades</option>
+            <option value="elementary">elementary school</option>
+            <option value="middle">middle school</option>
+            <option value="high">high school</option>
+          </select>
+
+
+          <hr>
+          <div class="schoolsheader"> <strong> Schools </strong> </div>
+          <br>
+          <div class="card">
+            <div class="school-title"> Henry, Charles W. </div>
+            <div class="school-type"> Elem/Middle </div>
+            <br>
+            <div class="school-address"> 601 Carpenter La.</div>
+            <div class="school-zip"> 19119-3405 </div>
+          </div>
+
+          <div class="card">
+            <div class="school-title"> Univeral Creighton Charter School </div>
+            <div class="school-type"> Elem/Middle </div>
+            <br>
+            <div class="school-address"> 5401Tabor Ave </div>
+            <div class="school-zip"> 19120 - 3614 </div>
+          </div>
+
+          <div class="card">
+            <div class="school-title"> Marshall, John </div>
+            <div class="school-type"> Elementary School </div>
+          </div>
+
+          <button id="my-button"> Hide Filters </button> <!-- Creates just the button but calls it "my-button" to be positioned and styled in main.css -->
 
     </div>
+
+
     <!-- Map -->
     <div id="map" class="map"></div>
 
