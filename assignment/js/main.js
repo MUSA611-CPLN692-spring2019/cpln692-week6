@@ -3,13 +3,11 @@
 ===================== */
 
 
-
-// 1. remove existed markers
-var removeMarkers = function(data) {
-  _.each(data, (obj) => {return map.removeLayer(obj)});
-};
-
-
+// 1. enable the inputs
+var inputlabels = ['#url','#latitudeKey','#longitudeKey'];
+for (let i = 0; i< inputlabels.length; i++) {
+    $(inputlabels[i]).prop('disabled', false);
+  }
 
 // 2. set map
 var map = L.map('map', {
@@ -25,40 +23,49 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 }).addTo(map);
 
 
-// 3. get user input
+// 3. define the function to remove existed markers
+var removeMarkers = function(data) {
+  _.each(data, (obj) => {return map.removeLayer(obj)});
+};
+
+// 4. define the function to get user input
 $('#url').val('https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-solar-installations.json')
 var read = function() {
   var inputs = {url:$('#url').val(),
-                Lat:$('#latitude').val(),
-                Lng:$('#longitude').val(),
+                Lat:$('#latitudeKey').val(),
+                Lng:$('#longitudeKey').val(),
   }
   return inputs
 }
 
 
-// 4.parse data
-var inputData = read();// read the user input
-var downloadData = $.ajax(inputData[url]);
-console.log(downloadData);
+// 5.define the function to parse data
 var parseData = function(data) {
   var parsed =  JSON.parse(data);
   return parsed
 };
 
 
-
-// 5. define plot function
-
+// 6. define plot function
 var plotMarkers = function(data) {
   for (let i = 0; i< data.length; i++){
     data[i].addTo(map)}};
-  $( 'button' ).click(function() {
-    console.log(inputData);
-    var parsed = parseData(downloadData);
-    var markers = [];
-    var markerOption = {radius:20,color:data.color,fill:data.color,opacity:1}
-    for (let i = 0; i< parsed.length; i++){
-      var a = L.circlemarker([parsed[i].inputData[Lat],parsed[i].inputData[Lng]],markerOption);
-      markers.push(a);}
-    plotMarkers(markers)
+
+// 7. Conduct the function in sequence when there's a click action
+  $( 'button' ).click(function() { //first the user do the click
+    var inputData = read();
+    $.ajax(inputData['url']).done(function(results){ // then we download the data from the url. use".done()" to set the sequence
+      removeMarkers(results)
+    //  console.log('inside') // to check if the functions work in line
+      var parsed = parseData(results);
+      var lat = inputData['Lat'];
+      var lng = inputData['Lng'];
+      var markers = [];
+      for (let i = 0; i< parsed.length; i++){
+          var a = L.marker([parsed[i][lat],parsed[i][lng]]);
+          markers.push(a);}
+    //  console.log(markers) to check if the markers are created successfully
+      plotMarkers(markers);
+    //  console.log('outside') // to check if the functions work in line
   });
+});

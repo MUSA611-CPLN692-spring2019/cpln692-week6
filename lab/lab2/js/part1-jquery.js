@@ -221,11 +221,10 @@ Task 3: Getting (reading) input values
   /* ====================================
     Task 4: Enable user interaction with the form
     ====================================*/
-    var inputlabels = ['#text-input1','#text-input2','#text-input3','#numeric-input1',
+    var inputlabels = ['#text-input1','#text-input2','#text-input3','#numeric-input',
   '#cbox-input1','#cbox-input2'];
-
     for (let i = 0; i< inputlabels.length; i++) {
-      $('inputlabels[i]').prop('disabled', false);
+      $(inputlabels[i]).prop('disabled', false);
     }
 
     /* ====================================
