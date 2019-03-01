@@ -172,4 +172,68 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+  //Task 1 Create useful labels
+  $('#main-heading').text('Mark Properties');
+  $('#text-label1').text('Street Address');
+  $('#text-label2').text('Neighborhood');
+  $('#text-label3').text('City');
+  $('#number-label').text('Year of Built');
+  $('#checkbox-label1').text('Is Vacant');
+  $('#checkbox-label2').text('Is Highrise');
+  $('#color-label').text('Choose your favorite color');
+  $("body>div.sidebar>button").text('Mark');
+
+  //Task 2 Writing input values
+  $('#text-input1').val('3900 Chestnut St');
+  $('#text-input2').val('University City');
+  $('#text-input3').val('Philadelphia');
+  $('#numeric-input').val(1898);
+  $('#cbox-input1').prop('checked',true);
+  $('#cbox-input2').prop('checked',true);
+  $('#color-input').val('#4200f4');
+
+  //Task 3 Reading input values
+  var streetAddress = $('#text-input1').val();
+  var neighborhood = $('#text-input2').val();
+  var city = $('#text-input3').val();
+  var yearOfBuilt = $('#numeric-input').val();
+  var vacancy = $('#cbox-input1').val();
+  var highrise = $('#cbox-input2').val();
+  var color = $('#color-input').val();
+
+  //Task 4 Interact with the web
+  $('#text-input1').prop('disabled', false);
+  $('#text-input2').prop('disabled', false);
+  $('#text-input3').prop('disabled', false);
+  $('#numeric-input').prop('disabled', false);
+  $('#cbox-input1').prop('disabled', false);
+  $('#cbox-input2').prop('disabled', false);
+  $('#color-input').prop('disabled', false);
+
+  //Task 5 Add a button trigger to log this form's object to console
+  $('body>div.sidebar>button').click(function(){
+    streetAddress = $('#text-input1').val();
+    neighborhood = $('#text-input2').val();
+    city = $('#text-input3').val();
+    yearOfBuilt = $('#numeric-input').val();
+    vacancy = $('#cbox-input1').val();
+    highrise = $('#cbox-input2').val();
+    color = $('#color-input').val();
+  });
+
+  //Task 6 Plot input data to the map on button click
+  var data = {
+    "LAT": 39.954968,
+    "LNG": -75.200154,
+    "Description": "Chestnut Hall Apartment, 3900 Chestnut St, This is my home!",
+    "Color": '#334455'
+  };
+
+  $('body>div.sidebar>button').click(function(){
+    L.circleMarker([data.LAT, data.LNG], 20, data.Color)
+    .addTo(map)
+    .bindPopup(data.Description)
+    .openPopup(map)
+  });
+
 });
