@@ -12,13 +12,40 @@
       <!-- =====================
       Add elements in this space
       ====================== -->
+
+
+  <label>URL Without the "https://": </label> <!--See main.js for why the "Without the "https://" is included in the text field description. For example, an acceptable user input for this would be raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-solar-installations.json, since this is a URL without its protocol. -->
+  <input id="url"></input> <!-- Calls the user-input URL element "url" so it can be referred to in the main.js back-end as "#url". -->
+
+  <br></br> <!-- Adds a line break -->
+
+  <label>Longitude Key: </label>
+  <input id="long"></input>
+
+  <br></br>
+
+  <label>Latitude Key: </label>
+  <input id="lat"></input>
+
+  <br></br>
+
+  <button id="mapping-button">Map Data</button> <!-- Creates the button to map the data, with the function that tries to make this button work in main.js-->
+
+  <br></br>
+
+  <button id="clear-button">Clear Data</button> <!-- Creates the button to clear the data that has been mapped, with the function that tries to make this button work in main.js-->
+
+
+      <!-- =====================
+      End of adding elements in this space
+      ====================== -->
     </div>
-    <!-- Map -->
-    <div id="map" class="map"></div>
-    <!-- Javascript Imports -->
-    <script src="js/jquery-2.2.0.js"></script>
-    <script src="js/underscore.js"></script>
-    <script src="js/leaflet.js"></script>
-    <script src="js/main.js"></script>
-  </body>
-</html>
+      <!-- Map -->
+      <div id="map" class="map"></div>
+      <!-- Javascript Imports -->
+      <script src="js/jquery-2.2.0.js"></script>
+      <script src="js/underscore.js"></script>
+      <script src="js/leaflet.js"></script>
+      <script src="js/main.js"></script>
+    </body>
+  </html>
