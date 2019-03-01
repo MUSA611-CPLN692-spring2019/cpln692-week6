@@ -192,7 +192,7 @@ $(document).ready(function() {
   $('#color-input').val('#2A2CFF');
 
   //Task3
-  var person1 = {Neighborhood: 'Center City', Gender: 'Female', Race:'Asian', Income: 'Low', EmploymentStatus: 'Employed', Color: '#98D4FF'};
+  var person1 = {Neighborhood: 'Center City', Gender: 'Female', Race:'Asian', Age: '23', Income: 'Low', EmploymentStatus: 'Employed', Color: '#2A2CFF'};
   console.log(person1);
 
   //Task4
@@ -206,24 +206,26 @@ $(document).ready(function() {
 
   //Task5
 
-  //var income = "Low";
-  //var status = "Employed";
+  var income = "";
+  var status = "";
 
   var createObject = function () {
     if ($('#cbox-input1').prop('checked')==true) {
-      var income = 'Low';
+      income = 'Low';
     } else {
-      var income = 'Not Low-Income';
+      income = 'Not Low-Income';
     }
     if ($('#cbox-input2').prop('checked')==true) {
-      var status = 'Employed';
+      status = 'Employed';
     } else {
-      var status = 'Not Employed';
+      status = 'Not Employed';
     }
     return {Neighborhood: $('#text-input1').val(), Gender: $('#text-input2').val(), Race: $('#text-input3').val(), Age: $('#numeric-input').val(), Income:income, EmploymentStatus: status, Color: $('#color-input').val()};
   };
 
-  $('button').click(console.log(createObject()));
+  $('button').click(function() {console.log(createObject())});
+  //$('button').click(console.log('button is working'));
+
 
   //Task6
 
@@ -242,13 +244,14 @@ $(document).ready(function() {
   $('#numeric-input2').prop('disabled',false);
   $('#numeric-input3').prop('disabled',false);
 
-  var createMarker = function () {
+  function createMarker() {
+    createObject();
     map.setView([$('#numeric-input3').val(), $('#numeric-input2').val()],14);
     return L.circleMarker([$('#numeric-input3').val(), $('#numeric-input2').val()], {color : $('#color-input').val()})
         .bindPopup($('#text-input4').val())
         .addTo(map);
-    };
-  $('button').click(createMarker());
+    }
+  $('button').click(function () {createMarker()});
 
   //Test marker coordinates : Meyerson Hall
   //LNG: -75.192728
