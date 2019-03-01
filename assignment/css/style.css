@@ -21,3 +21,13 @@ body {
     overflow-y: auto;
     padding: 20px;
 }
+
+.button {
+  padding-top: 20px;
+  right: 10px;
+}
+
+.input_text {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

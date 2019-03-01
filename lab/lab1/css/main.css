@@ -25,3 +25,39 @@ body {
     overflow-y: auto;
     padding: 20px;
 }
+
+.card {
+  background-color: #EEEEEE;
+  margin: 10px;
+  padding: 10px;
+}
+
+.school-name {
+  font-size: 18px;
+  padding-top: 25px
+}
+
+.school-type {
+  padding-bottom: 15px;
+  font-size: 16px;
+  color: gray;
+}
+
+.subtitle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.hr {
+  margin-top: 20px;
+}
+
+.school-address {
+  font-size: 16px;
+  padding-bottom: 25px;
+}
+
+.filter-button {
+  position: absolute;
+  right: 10px;
+}
