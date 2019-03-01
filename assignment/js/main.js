@@ -83,7 +83,6 @@ $(document).ready(function() {
 
   $('#clear').click(function() {
     removeMarkers(markers);
-    $('#keys').text('Potential Keys Will Appear Here');
   });
 
 });
