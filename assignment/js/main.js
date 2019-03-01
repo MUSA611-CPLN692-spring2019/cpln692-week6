@@ -1,24 +1,16 @@
-//get inputs
 
-$("#url").val("https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-solar-installations.json");
-$('#long').val('X');
-$('#lat').val('Y');
-
-var url = $("#url").val();
-var lat = $("#lat").val();
-var long = $("#long").val();
-console.log(url, lat, long);
-
-var downloadData = $.ajax(url);
+//EDITED CODE!
+//get entries
 
 var parseData = function(web) {
   return JSON.parse(web);
 };
+console.log(parseData);
 
 var makeMarkers = function(urlData) {
   var markers = [];
   _.forEach(urlData, function(obj) {
-    markers.push(L.circleMarker([obj[lat], obj[long]],{
+    markers.push(L.circleMarker([obj[object.lat], obj[object.long]],{
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
@@ -28,6 +20,13 @@ var makeMarkers = function(urlData) {
   console.log(urlData);
   return markers;};
 
+  var entries = function() {object = {
+    url : $("#url").val(),
+    lat : $("#lat").val(),
+    long : $("#long").val()};
+    console.log(object.url, object.lat, object.long);
+    return object;
+  };
 
 var plotMarkers = function(markers) {
   _.forEach(markers, function(i){
@@ -41,8 +40,11 @@ var removeMarkers = function(markers) {
   });
 };
 
+var markers = [];
+
 $("#btn").click(function(){
-downloadData.done(function(data) {
+  var objs = entries();
+$.ajax(objs.url).done(function(data) {
   parsed = parseData(data);
   markers = makeMarkers(parsed);
   plotMarkers(markers);
