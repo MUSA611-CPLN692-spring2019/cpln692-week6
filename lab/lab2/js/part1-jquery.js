@@ -172,4 +172,53 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+//Task 1
+ $("#main-heading").text('Your Favorite Restaurant');
+ $("#text-label1").text('Type');
+ $("#text-label2").text('Name');
+ $("#text-label3").text('Address');
+ $("#number-label").text('Stars');
+ $("#checkbox-label1").text('Will you visit again');
+ $("#checkbox-label2").text('Will you recommend to your friends');
+ $("#color-label").text('Marker color');
 });
+
+//Task 2
+ $("#text-input1").val('Brunch');
+ $("#text-input2").val('White Dog');
+ $("#text-input3").val('3420 Sansom St');
+ $("#numeric-input").val('5');
+ $("#cbox-input1").prop('checked',true);
+ $("#cbox-input2").prop('checked',true);
+ $("#color-input").val('#FE2E9A');
+
+//Task 3
+var labels = [$("#text-label3").text(), $("#text-label2").text(), $("#text-label3").text(), $("#number-label").text(), $("#checkbox-label1").text(), $("#checkbox-label2").text(), $("#color-label").text()];
+var inputs = [$("#text-input1").val(), $("#text-input2").val(), $("#text-input3").val(), $("#numeric-input").val(), $('#cbox-input1').val(), $('#cbox-input2').val(), $('#color-input').val()];
+displayInfo = _.zip(labels, inputs);
+console.log(displayInfo);
+
+//Task 4
+$('#text-input1').prop('disabled', false);
+$('#text-input2').prop('disabled', false);
+$('#text-input3').prop('disabled', false);
+$('#numeric-input').prop('disabled', false);
+$('#cbox-input1').prop('disabled', false);
+$('#cbox-input2').prop('disabled', false);
+$("#color-input").prop('disabled', false);
+
+//Task 5
+$("Button").bind("click", function(){
+  console.log(displayInfo);
+});
+
+//Task 6
+ $("#number-label2").text('Lat');
+ $("#number-label3").text('Lng');
+ $("#numeric-input2").val('39.953805');
+ $("#numeric-input3").val('-75.192646');
+ var bondUpText = "This is my favorite restaurant!";
+ var lat = $("#numeric-input2").val();
+ var lng = $("#numeric-input3").val();
+ var markerColor = $("#color-input").val();
+ L.circleMarker([lat,lng], {color: markerColor}).addTo(map).bindPopup(bondUpText);
