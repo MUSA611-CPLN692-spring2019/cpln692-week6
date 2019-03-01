@@ -189,7 +189,7 @@ $(document).ready(function() {
   $('#numeric-input').val('23');
   $('#cbox-input1').prop('checked',true);
   $('#cbox-input2').prop('checked', true);
-  $('#color-input').val('#98D4FF');
+  $('#color-input').val('#2A2CFF');
 
   //Task3
   var person1 = {Neighborhood: 'Center City', Gender: 'Female', Race:'Asian', Income: 'Low', EmploymentStatus: 'Employed', Color: '#98D4FF'};
@@ -220,13 +220,42 @@ $(document).ready(function() {
     } else {
       var status = 'Not Employed';
     }
-    return {Neighborhood: $('#text-input1').val(), Gender: $('#text-input2').val(), Race: $('#text-input3').val, Age: $('#numeric-input').val(), Income:income, EmploymentStatus: status};
+    return {Neighborhood: $('#text-input1').val(), Gender: $('#text-input2').val(), Race: $('#text-input3').val(), Age: $('#numeric-input').val(), Income:income, EmploymentStatus: status, Color: $('#color-input').val()};
   };
 
   $('button').click(console.log(createObject()));
 
   //Task6
 
+  //Rename texts to appropriate names
+  $('#text-label4').text('Location Name');
+  $('#number-label2').text('LNG');
+  $('#number-label3').text('LAT');
 
+  //Fill in inputs with example
+  $('#text-input4').val('Meyerson Hall');
+  $('#numeric-input2').val('-75.192728');
+  $('#numeric-input3').val('39.952425');
+
+  //Enable text/numeric boxes for marker
+  $('#text-input4').prop('disabled',false);
+  $('#numeric-input2').prop('disabled',false);
+  $('#numeric-input3').prop('disabled',false);
+
+  var createMarker = function () {
+    map.setView([$('#numeric-input3').val(), $('#numeric-input2').val()],14);
+    return L.circleMarker([$('#numeric-input3').val(), $('#numeric-input2').val()], {color : $('#color-input').val()})
+        .bindPopup($('#text-input4').val())
+        .addTo(map);
+    };
+  $('button').click(createMarker());
+
+  //Test marker coordinates : Meyerson Hall
+  //LNG: -75.192728
+  //LAT: 39.952425
+
+  //Test 2
+  //-75.1958
+  //39.9572
 
 });
