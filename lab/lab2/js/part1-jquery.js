@@ -172,4 +172,59 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+
+  $('#main-heading').text('People Marker');
+
+  $('#text-label1').text('Made up First Name');
+  $('#text-label2').text('Made up Last Name');
+  $('#text-label3').text('Location');
+  $('#number-label').text('Age');
+  $('#checkbox-label1').text('Male?');
+  $('#checkbox-label2').text('Married?');
+  $('#color-label').text('Select a marker color');
+
+  $('#text-input1').val('John').prop('disabled', false);
+  $('#text-input2').val('Smith').prop('disabled', false);
+  $('#text-input3').val("39.9526, -75.1652").prop('disabled', false);
+  $('#numeric-input').val('25').prop('disabled', false);
+  $('#cbox-input1').prop('checked', true).prop('disabled', false);
+  $('#cbox-input2').prop('checked', false).prop('disabled', false);
+  $('#color-input').val('#FF0000').prop('disabled', false);
+
+  var readinput = function() {
+    var data = {
+      firstname : $('#text-input1').val(),
+      lastname : $('#text-input2').val(),
+      location : $('#text-input3').val(),
+      age : $('#numeric-input').val(),
+      male : $('#cbox-input1').prop('checked'),
+      married : $('#cbox-input2').prop('checked'),
+      color : $('#color-input').val(),
+    };
+    return data;
+  };
+
+  var generateinfo = function (data) {
+    var marnot, sex, age, line;
+    age = data.age + '-year-old ';
+    if (data.married == true) {marnot = 'married '} else {marnot = 'unmarried '};
+    if (data.male == true) {sex = 'male.'} else {sex = 'female.'};
+    line = age + marnot + sex;
+    return line;
+  };
+
+  var generatepopup = function(data) {
+    var secondline = generateinfo(data);
+    var popup = data.firstname + " " + data.lastname + '<br>' + secondline;
+    return popup;
+  };
+
+  $('button').click(function(){
+    var data = readinput();
+    console.log(data);
+
+    var marker = L.circleMarker(L.latLng(data.location.split(',')), {color:data.color});
+    var popup = generatepopup(data);
+    marker.bindPopup(popup).addTo(map);
+  });
 });

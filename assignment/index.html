@@ -12,6 +12,22 @@
       <!-- =====================
       Add elements in this space
       ====================== -->
+      <h1>Generic Point Mapper</h1>
+      <label id='url' for='url-input'>Type URL here:</label>
+      <input id='url-input' type='text' value="http://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/json/philadelphia-crime-snippet.json"
+      size=30></input>
+      <button id='help'>Help with Keys</button><br>
+      <font color='gray'>
+      Warning: Might not work with objects with too many attributes, as alert box size is limited.
+      </font>
+      <br><br>
+
+      <label id='lat' for='lat-input'>Enter lat key name:</label>
+      <input id='lat-input' type='text' value='Lat'></input> <br>
+      <label id='long' for='long-input'>Enter long key name:</label>
+      <input id='long-input' type='text' value='Lng'></input>
+      <button id='plot'>Draw Points</button>
+      <button id='clear'>Reset</button>
     </div>
     <!-- Map -->
     <div id="map" class="map"></div>

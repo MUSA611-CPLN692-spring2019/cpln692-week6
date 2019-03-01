@@ -25,3 +25,23 @@ body {
     overflow-y: auto;
     padding: 20px;
 }
+
+.card{
+  background-color: lightgray;
+  padding: 10px;
+  margin: 10px;
+}
+
+.school-title{
+  font-size: 25px;
+}
+
+.school-type{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.promptbox{
+  margin: 20px;
+}
