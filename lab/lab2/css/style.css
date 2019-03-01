@@ -21,3 +21,12 @@ body {
     overflow-y: auto;
     padding: 20px;
 }
+
+.leaflet-div-icon
+{
+  background: transparent;
+  width: 20px;
+	height:20px;
+  border: 0px;
+  background-image:url(/UPENN/CPLN692/cpln692-week6/lab/lab2/js/images/myicon2.png);
+}

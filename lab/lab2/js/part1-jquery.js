@@ -172,4 +172,101 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+  //Task 1: Using javascript, change the HTML to create useful labels for our UI
+  $('#main-heading').text("Resturant Survey");
+  $('#text-label1').text("Name");
+  $('#text-label2').text("Favorite resturant");
+  $('#text-label3').text("Resturant address");
+  $('#number-label').text("Overall rating");
+  $('#checkbox-label1').text("Accept reservation?");
+  $('#checkbox-label2').text("Free Parking?");
+  $('#color-label').text("Color of logo");
+  $('button').text("Plot");
+
+  //Task 2: Setting (writing) input values
+  $('#text-input1').val("Astoria");
+  $('#text-input2').val("Houston Market");
+  $('#text-input3').val("3417 Spruce St");
+  $('#numeric-input').val('8');
+  $('#cbox-input1').prop('checked', true);
+  $('#cbox-input2').prop('checked', true);
+  $('#color-input').val('#e66465');
+
+  //Task 3: Getting (reading) input values
+  var readinput = function() {
+    label1 = $('#text-label1').text();
+    input1 = $('#text-input1').val();
+    label2 = $('#text-label2').text();
+    input2 = $('#text-input2').val();
+    label3 = $('#text-label3').text();
+    input3 = $('#text-input3').val();
+    label4 = $('#number-label').text();
+    input4 = $('#numeric-input').val();
+    label5 = $('#checkbox-label1').text();
+    input5 = $('#cbox-input1').prop('checked');
+    label6 = $('#checkbox-label2').text();
+    input6 = $('#cbox-input2').prop('checked');
+    label7 = $('#color-label').text();
+    input7 = $('#color-input').val();
+
+  };
+  /*console.log($('#text-label1').text(),':',$('#text-input1').val());
+  console.log($('#text-label2').text(),':',$('#text-input2').val());
+  console.log($('#text-label3').text(),':',$('#text-input3').val());
+  console.log($('#number-label').text(),':',$('#numeric-input').val());
+  console.log($('#checkbox-label1').text(), $('#cbox-input1').prop('checked'));
+  console.log($('#checkbox-label2').text(), $('#cbox-input2').prop('checked'));
+  console.log($('#color-label').text(),':',$('#color-input').val());*/
+
+  //Task 4: Enable user interaction with the form
+  $( "#text-input1" ).prop( "disabled", false );
+  $( "#text-input2" ).prop( "disabled", false );
+  $( "#text-input3" ).prop( "disabled", false );
+  $( "#numeric-input" ).prop( "disabled", false );
+  $( "#cbox-input1" ).prop( "disabled", false );
+  $( "#cbox-input2" ).prop( "disabled", false );
+
+  //Task 5: Add a button trigger to log this form's object to console
+  $('button').click(function(e) {
+  readinput();
+  console.log(label1, ":", input1);
+  console.log(label2, ":", input2);
+  console.log(label3, ":", input3);
+  console.log(label4, ":", input4);
+  console.log(label5, ":", input5);
+  console.log(label6, ":", input6);
+  console.log(label7, ":", input7);
+});
+  //Task 6: Plot input data to the map on button click
+  //Insert the label after address
+  $("#number-label").prepend("<div><label id='lat-label' for='lat-input'>Latitude</label><input type='number' id='lat-input' value = 39.951185><br><br><label id='lon-label' for='lon-input'>Longitude</label><input type='number' id='lon-input' value = -75.194120><br><br><label id='discription-label' for='discription-input'>Description</label><input id='discription-input' class='input-text' type='text' value='Student dining hall'><br><br></div>");
+
+  latlabel = $('#lat-label').text();
+  lonlabel = $('#lon-label').text();
+  discriptionlabel = $('#discription-label').text();
+
+  //Task 8: Try Leaflet's divIcon
+  var myIcon = L.divIcon({className: 'leaflet-div-icon', iconSize: 'auto'});
+
+  var plotData = function() {
+    latinput = $('#lat-input').val();
+    loninput = $('#lon-input').val();
+    //Task 7: Use default values
+    latinput = (latinput <= 90 & latinput >= -90) ?  latinput : 39.9522;
+    loninput = (loninput <= 180 & loninput >= -180) ?  loninput : -75.1639;
+    discriptioninput = $('#discription-input').val();
+    marker = L.marker([latinput, loninput], {icon: myIcon}).addTo(map).bindPopup("<b>" + discriptioninput + "</b>");
+    //circle = L.circleMarker([latinput, loninput]).addTo(map).bindPopup("<b>" + discriptioninput + "</b>");
+};
+
+  //Add circlemarker
+  $('button').click(function(e) {
+
+    plotData();
+  console.log(latlabel, ":", latinput);
+  console.log(lonlabel, ":", loninput);
+  console.log(discriptionlabel, ":", discriptioninput);
+
+});
+
 });
