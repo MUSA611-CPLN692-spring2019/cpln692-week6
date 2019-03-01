@@ -88,7 +88,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     are specialized to only allow numeric values (possible interpretations include: ageInYears, pointsScored).
     The color field is specialized to use HTML5 colorpickers provided by each browser and store data
     as a string in hexadecimal color format (i.e. '#ffffff'); suitable representations include e.g.
-    hairColor, markerColor.
+    BirthHairColor, markerColor.
 
     Try to imagine a single object that you're describing. For example, if your object is "person",
     you might want to include a name, an address, an age, a couple of boolean characteristics, and a
@@ -172,4 +172,82 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+
+
+  //Task 1:
+  $('#text-label1').text('Name:'); //Changes the description of the text-label1 HTML item (the text saying what to put in the first text box) to "Name:" from what it originally was. Lines below this for Task 1 do basically the same thing for other HTML items
+  $('#text-label2').text('Birth Hospital Name:');
+  $('#text-label3').text('Birth Month:');
+  $('#number-label').text('Birth Year:');
+  $('#checkbox-label1').text('Check if you know the time of day you were born.');
+  $('#checkbox-label2').text('Check if you know your birth weight.');
+  $('#color-label').text('Birth Hair Color:');
+  $('button').text('Map the location of your birth hospital.');
+
+
+  //Task 2:
+  $('#text-input1').val('Phil Adelphian'); //Changes the value (what goes in the text box itself) from blank to something. This task mimics/replicates user behavior essentially
+  $('#text-input2').val('TJU Hospital');
+  $('#text-input3').val('January');
+  $('#numeric-input').val('1995');
+  $('#cbox-input1').prop("checked", true); //Makes it so the check boxes go from unchecked to checked. Had to put this and line below in here to check the checkboxes, because if I didn't, the checkboxes would not be checked by default
+  $('#cbox-input2').prop("checked", true);
+  $('#color-label').val('#400000'); //This tries to change the color selected to a dark brown (HTML color code #400000 according to https://htmlcolorcodes.com) but cannot for some reason
+
+
+  //Task 3:
+  var data = {
+    "name": $('#text-input1').val(),
+    "birthHospitalName": $('#text-input2').val(),
+    "birthMonth": $('#text-input3').val(),
+    "birthYear": $('#numeric-input').val(),
+    "KnowBirthTime": $('#cbox-input1').val(),
+    "DoKnowBirthWeight": $('#cbox-input2').val(),
+    "birthHairColor":  $('#color-input').val()
+  }; //Creates an array which would contain the user-inputted data. I created key names to represent/summarize what the user has to put in for each HTML item (ex. the "Name:" box gets a "name" key, etc.)
+
+
+  //Task 4:
+  $('#text-input1').prop('disabled', false); //All of these lines in Task 4 enable all the page's HTML items (text boxes, check marks, etc.), meaning they let users type into them, check them, etc.
+  $('#text-input2').prop('disabled', false);
+  $('#text-input3').prop('disabled', false);
+  $('#numeric-input').prop('disabled', false);
+  $('#cbox-input1').prop('disabled', false);
+  $('#cbox-input2').prop('disabled', false);
+  $('#color-label').prop('disabled', false);
+
+
+  //Task 5:
+  $('button').click(function() {
+    var data = {
+      "name": $('#text-input1').val(),
+      "birthHospitalName": $('#text-input2').val(),
+      "birthMonth": $('#text-input3').val(),
+      "birthYear": $('#numeric-input').val(),
+      "KnowBirthTime": $('#cbox-input1').val(),
+      "DoKnowBirthWeight": $('#cbox-input2').val(),
+      "birthHairColor":  $('#color-input').val()
+    };
+    console.log(data);
+  }); //This button first gathers and organizes all of the user-inputted data into an array (first created in Task 4), then prints it to the console for the user to see
+
+
+  //Task 6:
+  $('button').click(function() {
+    var data = {
+      "name": $('#text-input1').val(),
+      "birthHospitalName": $('#text-input2').val(),
+      "birthMonth": $('#text-input3').val(),
+      "birthYear": $('#numeric-input').val(),
+      "KnowBirthTime": $('#cbox-input1').val(),
+      "DoKnowBirthWeight": $('#cbox-input2').val(),
+      "birthHairColor":  $('#color-input').val()
+    }; //First gathers and organizes all of the user-inputted data
+
+    L.circleMarker([39.949371, -75.158053], { //Then maps location of Thomas Jefferson University Hospital
+      color: data.birthHairColor //Then makes the color of the point reactive to the user's color choice in the front-end. This does make the color successfully change.
+    }).bindPopup(data.birthHospitalName).addTo(map); //Then finally creates a popup of the user input name for the hospital
+  });
+
+
 });
