@@ -72,8 +72,10 @@ $(document).ready(function() {
   $('#plot').click(function() {
     var inputs = readinput();
 
+
     $.ajax(inputs.url).done(function(data) {
       var parsed = parseData(data);
+      removeMarkers(markers);
 
       markers = makeMarkers(parsed, inputs.lat, inputs.lng);
       plotMarkers(markers);
