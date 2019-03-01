@@ -227,7 +227,7 @@ $("button").click(function() {
 });
 
 
-//Task 5: Add a button trigger to log this form's object to console
+//Task 6: Plot input data to the map on button click
 $("button").click(function() {
   //put input dictionary object into a variable to store when button is clicked
   var input = inputObject;
