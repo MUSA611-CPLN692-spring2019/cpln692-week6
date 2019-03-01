@@ -11,6 +11,7 @@
   </head>
   <body>
 
+
     <!-- =====================
 
     # Week 6 - lab 1
@@ -61,6 +62,48 @@
     <!-- Sidebar -->
     <div class="sidebar">
 
+      <h2>Filters</h2>
+
+      <div style="position: absolute; left: 220px; top: 40px; bottom: 0;">
+      <button id="my-button">Hide Filter</button>
+      </div>
+
+      <div class="name_grade"> By Name </div>
+      <br>
+
+      <input type = "text"></input>
+      <div class="name_grade"> By Grade </div>
+      <br>
+
+      <select>
+          <option value="volvo">All Grades</option>
+          <option value="volvo">Elementary School</option>
+          <option value="volvo">Middle School</option>
+          <option value="volvo">High School</option>
+      </select>
+
+      <hr>
+      <h2> Schools </h2>
+<div class="cards">
+      <div class="card">
+        <div class="school-title"> school 1 </div>
+        <div class="school-type"> school type </div>
+        <div> school address </div>
+      </div>
+
+      <div class="card">
+        <div class="school-title"> school 2 </div>
+        <div class="school-type"> school type </div>
+        <div> school address </div>
+      </div>
+
+      <div class="card">
+        <div class="school-title"> school 3 </div>
+        <div class="school-type"> school type </div>
+        <div> school address </div>
+      </div>
+
+    </div>
       <!-- =====================
       Add HTML!
       ====================== -->
@@ -73,6 +116,9 @@
     <script src="js/leaflet.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/jquery-2.2.0.js"></script>
+    <script src="data/phillySchools.js"></script>
+    <script src="js/main.js"></script>
+
     <!--   if you are doing the stretch goals
            create:
            "main.js" file and link to it here
