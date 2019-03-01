@@ -1,48 +1,17 @@
-/* =====================
-  Lab 2, part 2 - application state
-
-  Spatial applications aren't typically as simple as putting data on a map. In
-  addition, you'll usually need to change the stored data in response to user
-  input. This lab walks you through writing a set of functions that are capable
-  of building an interactive application.
-
-  First, we'll need to write a function for loading points onto the map. Choose
-  any dataset from part1 and write a function here to download it, parse it,
-  make it into markers, and plot it. You'll know you've succeeded when you can
-  see markers on the map.
-
-  NOTE 1: When we have added markers to the map in the past, we have used a line like:
-
-       L.marker([50.5, 30.5]).addTo(map);
-
-       This is accomplishing two goals. L.marker([50.5, 30.5]) makes a marker
-       and .addTo(map) adds that marker to the map. This task differs in that,
-       you are being asked to create separate functions: one to create markers
-       and one to add them to the map. This is an important step if we want to
-       refer to plotted markers later (to delete them from the map, for instance).
-
-  (IMPORTANT!)
-  NOTE 2: These functions are being called for you. Look to the bottom of this file
-       to see where and how the functions you are defining will be used. Remember
-       that function calls (e.g. func();) which are equal to a value (i.e. you
-       can set a var to it: var result = func();) must use the 'return' keyword.
-
-       var justOne = function() {
-         return 1;
-       }
-       var one = justOne();
-===================== */
-
 // We set this to HTTP to prevent 'CORS' issues
+var markers =[];
 var downloadData = $.ajax($("#urlIn").val());
+var lat = $("#latIn").val();
+var lng = $("#lonIn").val();
 var parseData = function(rawData) {return JSON.parse(rawData);};
 var makeMarkers = function(pData) {
-  var lat = "dataLine.Lat()";
-  var lng = "dataLine.Lng()";
-  var markers = [];
-  _.each(pData, (dataLine) => {markers.push(L.marker([lat, lng]))});
+  markers = [];
+  _.each(pData, (dataLine) => {
+    markers.push(L.marker([dataLine[lat], dataLine[lng]]));
+  });
   return markers;
 };
+
 var plotMarkers = function(marker) {
   _.each(marker, (mark) => {
     mark.addTo(map);
@@ -103,5 +72,16 @@ downloadData.done(function(data) {
   var markers = makeMarkers(parsed);
   //console.log(markers);
   plotMarkers(markers);
-  //removeMarkers(markers);
+});
+
+$("#btn").click(function() {
+  removeMarkers(markers);
+  downloadData = $.ajax($("#urlIn").val());
+  lat = $("#latIn").val();
+  lng = $("#lonIn").val();
+  downloadData.done(function(data) {
+  parsed = parseData(data);
+  var markers = makeMarkers(parsed);
+  plotMarkers(markers);
+});
 });
