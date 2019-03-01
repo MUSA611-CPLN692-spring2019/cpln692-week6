@@ -1,17 +1,14 @@
 /* =====================
   Set up our map
 ===================== */
-var map = L.map('map', {
-  center: [39.9522, -75.1639],
-  zoom: 14
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGhydXZzMDQiLCJhIjoiY2psZWkxem45MDZuNjNrcWhkZDMxdXo5byJ9.O_pXu61MgF8AfZiWLaR5pA';
+const map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/dhruvs04/cjso5jh5x3mrj1flhjtzfn30u',
+center: [-99, 41],
+zoom: 3.8
 });
-var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  subdomains: 'abcd',
-  minZoom: 0,
-  maxZoom: 20,
-  ext: 'png'
-}).addTo(map);
 
 /* =====================
   Lab - jQuery
@@ -171,5 +168,67 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // the function passed to `ready` until the HTML document is fully loaded and all scripts have
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
-  // Do your stuff here
-});
+  $("#main-heading").text('Map POI');
+
+  //declaring as variables, credit Mayu Tanaka
+   var labels = ["#text-label1", "#text-label2", "#text-label3", "#number-label",
+                 "#checkbox-label1", "#checkbox-label2", "#color-label"];
+
+   var inputs = ["#text-input1", "#text-input2", "#text-input3", "#numeric-input",
+                 '#cbox-input1', '#cbox-input2', '#color-input'];
+
+   var texts = ['City: ', 'Point of Interest ', 'Coordinates (Longitude,Latitude): ',
+                'Marker Radius: ', 'Resident of city?', 'Want to map it?', 'Marker Color: '];
+
+  var fallback = ['San Francisco','Golden Gate Bridge','39.820,-122.4782','5'];
+
+
+
+   _.each(labels, function(obj) {
+     var idx = _.indexOf(labels, obj);
+     if(obj.indexOf('text')!==-1|| obj.indexOf('num')!==-1){
+       $(inputs[idx]).val(fallback[idx]);
+     }
+     if(obj.indexOf('check')!==-1){
+       $(inputs[idx]).attr('checked',true);
+     }
+     $(obj).text(texts[idx]);
+     $(inputs[idx]).prop('disabled', false);
+   });
+
+   var read = function() {
+     var Uinputs = {city : $('#text-input1').val(),
+                   poi : $('#text-input2').val(),
+                   coords : $('#text-input3').val(),
+                   radius : $('#numeric-input').val(),
+                   resi : $('#cbox-input1').change(function() {
+                     $(this).val($(this).is(':checked'));
+                   }).change().val() ,
+                   mapit : $('#cbox-input2').attr('checked', true),
+                   col : $('#color-input').val()};
+     return Uinputs;
+   };
+
+
+   $('button').text('Map!').click(function() {
+
+     var dplot = read();
+     console.log(dplot);
+
+       var marker = {
+         geometry: {coords: [parseFloat(dplot.coords.split(',')[1]),parseFloat(dplot.coords.split(',')[0])]},
+         properties: {
+           name: dplot.poi,
+           city: dplot.city
+         }
+       };
+
+     new mapboxgl.Marker(marker)
+     .setLngLat(marker.geometry.coords)
+     .setPopup(new mapboxgl.Popup({offset: 25})
+      .setHTML('<h3>'+marker.properties.name+'</h3>'+ '<p>'+ marker.properties.city+'</p>'))
+     .addTo(map);
+   });
+
+
+  });
