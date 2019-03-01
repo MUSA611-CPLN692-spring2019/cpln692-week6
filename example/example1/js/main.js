@@ -8,6 +8,7 @@ getAndParseData();
   ALL functions called here will be called EVERY time a click event fires
 ===================== */
 $('button#my-button').click(function(e) {
+  debugger;
   appState.numericField1 = $('#num1').val();
   console.log("numericField1", appState.numericField1);
 

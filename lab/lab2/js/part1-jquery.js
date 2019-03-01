@@ -259,9 +259,3 @@ Task 3: Getting (reading) input values
 
     // Do your stuff here
 });
-
-//2. A comprehensive way to finish the tasks
-/*$('#main-heading').text('Find the solar station')
-
-var labels = ['#text-label1','#text-label2','#text-label3','#number-label',
-'#checkbox-label1','#checkbox-label2','#color-label'];*/
