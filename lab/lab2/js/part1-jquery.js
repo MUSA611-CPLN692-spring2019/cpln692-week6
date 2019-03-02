@@ -172,4 +172,63 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+//Task 1
+  $("#text-label1").text('Your Destination')
+  $("#text-label2").text('Your Name')
+  $("#text-label3").text('Your Address')
+  $("#number-label").text('Estimated Time(min)')
+  $('#checkbox-label1').text('Pay with Card');
+  $('#checkbox-label2').text('Pay after Arrival');
+  $('#color-label').text('Your Color');
+  $('button').text('Confirm');
+//Task 2
+  $('#text-input1').val('Philadelphia Museum of Art');
+  $('#text-input2').val('JZ Zhang');
+  $('#text-input3').val('20 S. 36th St, Philadelphia, PA 19104');
+  $('#numeric-input').val(10);
+  $('#color-input').val('#FFA500');
+
+//Task 3
+  dest = $('#text-input1').val();
+  name = $('#text-input2').val();
+  address = $('#text-input3').val();
+  time = $('#numeric-input').val();
+  card = $('#cbox-input1').val();
+  pay =  $('#cbox-input2').val();
+  color =  $('#color-input').val();
+
+
+//Task 4
+  $('#text-input1').prop('disabled',false);
+  $('#text-input2').prop('disabled',false);
+  $('#text-input3').prop('disabled',false);
+  $('#numeric-input').prop('disabled',false);
+  $('#cbox-input1').prop('disabled',false);
+  $('#cbox-input2').prop('disabled',false);
+  $('#color-input').prop('disabled',false);
+
+//Task 5
+  $('button').click(function(){
+    console.log($('#text-label1').text(), ":", dest);
+	  console.log($('#text-input2').val(), ":", address);
+	  console.log($('#text-label3').text(), ":", time);
+	  console.log($('#number-label').text(), ":", time);
+	  console.log($('#checkbox-label1').text(), ":", card);
+	  console.log($('#checkbox-label2').text(), ":", pay);
+	  console.log($('#color-label').text(), ":", color);
+  });
+
+//Task 6
+  lat = $('#lat-label').text('Lat');
+  lng = $('#lng-label').text('Long');
+  n2 = $('#numeric-input2').val(39.9);
+  n3 = $('#numeric-input3').val(-75.2);
+  dis = $('#discription-label').text();
+  var plotCircle = function() {
+  L.circleMarker([lat,lng], {color: color, radius:10}).addTo(map).bindPopup("<b>" + dis + "</b>");
+  };
+
+  $('button').click(function(){
+	    plotCircle();
+  });
 });
