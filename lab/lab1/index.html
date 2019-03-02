@@ -2,14 +2,18 @@
 <html>
   <head>
     <!-- CSS Imports -->
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/leaflet.css" />
-    <!-- =====================
-    Edit css/main.css
-    ====================== -->
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+
     <link rel="stylesheet" href="css/main.css" />
+
   </head>
   <body>
+
 
     <!-- =====================
 
@@ -58,28 +62,53 @@
 
     ====================== -->
 
-    <!-- Sidebar -->
+    <div class ="header" style="visibility:visible">
+      <h2> Mapping Date </h2>
+    </div>
+
     <div class="sidebar">
 
-      <!-- =====================
-      Add HTML!
-      ====================== -->
+      <div class="lid">
+        <h3>Filters</h3>
+        <h3 class="drop">+</h3>
+      </div>
+
+      <div class="panel">
+        <form id="filter"> //creates a form 
+          <p>
+            <label for="f-name" style="font-family:avenir;">By Name</label><br>
+            <input type="text" name="f-name" id="f-name" />
+          </p>
+
+          <p>
+            <label for="f-grade" style="font-family:avenir;">By Grade</label><br>
+            <select name="f-grade" id="f-grade"></select>
+          </p>
+
+        </form></div>
+
+        <hr />
+
+      <div class="lid">
+        <h3>Schools</h3>
+        <h3 class="drop">+</h3>
+      </div>
+
+      <div class="panel" id="schools"></div>
 
     </div>
+
     <!-- Map -->
-    <div id="map" class="map"></div>
+    <div id="map" class="map" ></div>
 
     <!-- Javascript Imports -->
     <script src="js/leaflet.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/jquery-2.2.0.js"></script>
-    <!--   if you are doing the stretch goals
-           create:
-           "main.js" file and link to it here
-           access to "data/phillySchools.js"    -->
+    <script src="data/phillySchools.js"></script>
+    <script src="js/main.js"></script>
 
-    <!-- Javascript Code -->
-    <script>
+    <!-- <script>
       var map = L.map('map', {
         center: [39.9522, -75.1639],
         zoom: 14
@@ -91,6 +120,17 @@
       	maxZoom: 20,
       	ext: 'png'
       }).addTo(map);
+    </script> -->
+
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGhydXZzMDQiLCJhIjoiY2psZWkxem45MDZuNjNrcWhkZDMxdXo5byJ9.O_pXu61MgF8AfZiWLaR5pA';
+    const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/dhruvs04/cjso5jh5x3mrj1flhjtzfn30u',
+    center: [-75.202,39.964],
+    zoom: 12
+    });
     </script>
+
   </body>
 </html>
