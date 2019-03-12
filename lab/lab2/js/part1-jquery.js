@@ -181,3 +181,11 @@ $('#number-label').text('Number of Patties');
 
 
 });
+
+
+// from class
+
+getData = () => $.ajax('slideModel.js')
+
+
+$('.sidebar').click(() => {console.log("clicked")})
