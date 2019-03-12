@@ -172,4 +172,49 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 // been interpreted. It is, therefore, an example of asynchronous behavior.
 $(document).ready(function() {
   // Do your stuff here
+  //task1
+  $('#main-heading').text('Best resaturant you recommend')
+  $('#text-label1').text('Neighborhood you are in');
+  $('#text-label2').text('Your favorite food')
+  $('#text-label3').text('Location')
+  $('#number-label').text('Number of people')
+  $('#checkbox-label1').text('Spicy')
+  $('#checkbox-label2').text('Sweet')
+  $('#color-label').text('Marker color')
+  $('button').text('Show It On A Map')
+  //task2
+ $("#text-input1").val('Center City')
+ $("#text-input2").val('BBQ')
+ $("#text-input3").val('39.954832,-75.190416')
+ $("#numeric-input").val('3')
+ $("#cbox-input1").prop('checked',true);
+ $("#cbox-input2").prop('checked',true);
+ $("#color-input").val('#b31800')
+
+ //task3
+ var labels = [$("#text-label1").text(), $("#text-label2").text(), $("#text-label3").text(), $("#number-label").text(), $("#checkbox-label1").text(), $("#checkbox-label2").text(), $("#color-label").text()];
+ var inputs = [$("#text-input1").val(), $("#text-input2").val(), $("#text-input3").val(), $("#numeric-input").val(), $('#cbox-input1').val(), $('#cbox-input2').val(), $('#color-input').val()];
+ obj = _.zip(labels, inputs);
+ console.log(obj);
+
+ //task4
+ var inputid = ["#text-input1", "#text-input2", "#text-input3", "#numeric-input",'#cbox-input1', '#cbox-input2', '#color-input'];
+ _.each(inputid, function(input){
+   $(input).prop('disabled', false);
+  });
+
+//task5
+$("Button").bind("click", function(){
+  console.log(obj);
+});
+
+//task6
+var description = "Best resaturant you recommend";
+var coordinate = $('#text-input3').val();
+var lat = parseFloat(coordinate.split(',')[0]);
+var lng = parseFloat(coordinate.split(',')[1]);
+var markerColor = $("#color-input").val();
+L.circleMarker([lat,lng], {color: markerColor}).addTo(map).bindPopup(description);
+
+
 });
